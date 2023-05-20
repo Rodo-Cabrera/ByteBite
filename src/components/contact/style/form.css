@@ -1,0 +1,38 @@
+#formGridMsg{
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-bottom: 1px solid rgb(24, 15, 121);
+  background: transparent;
+  outline: none;
+  color: rgb(17, 19, 125);
+}
+
+#formGridEmail, #formGridName, #formGridAddress1, #formGridAddress2, #formGridCity, #formGridCountry{
+  border: none;
+  border-bottom: 1px solid rgb(24, 15, 121);
+  background: transparent;
+  outline: none;
+  color: rgb(17, 19, 125);
+}
+
+.formContainer {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.615);
+  flex-direction: column;
+
+}
+
+.logoForm {
+
+   background-color: #090922;
+   padding: 1rem;
+   border-radius: 1rem;
+   margin-bottom: 20px;
+}
+
+.card {
+  --bs-card-border-width: none;
+}

@@ -1,0 +1,8 @@
+.alertas::before {
+  display: inline;
+  content: "❌ ";
+}
+
+.alertas{
+  color: red;
+}

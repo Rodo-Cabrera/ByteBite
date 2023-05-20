@@ -1,0 +1,42 @@
+.navContainer {
+  margin-bottom: 1rem;
+  background-color: #ffc3c3 !important;
+}
+
+.navLogo{
+  width: 4rem ;
+  height: 4rem;
+  margin: 1px, 0px, 1px, 0px;
+}
+
+.regBtn{
+  padding: 1px;
+  border-radius: 2rem;
+  align-items: center;
+  background-color: #3e4570;
+}
+
+.underline {
+  display: inline-block;
+  position: relative;
+  text-shadow: -1px 0px 11px rgba(255,255,255,0.74);
+  font-weight: bold;
+}
+
+.underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 0px;
+  left: 0;
+  background-color: #3e4570;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.underline:hover::after {
+  transform: scaleX(1);
+  transform-origin:bottom left;
+}
