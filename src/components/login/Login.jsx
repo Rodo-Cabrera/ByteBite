@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useForm } from "react";
 import { alertSuccess, alertError } from "../../utils/alertCustom";
 import { messages } from "../../utils/messages";
 import { endPoint } from "../../utils/endpointsConfig";
 import clientAxios from "../../utils/clientAxios";
+import { validationsFields } from "../../utils/validation";
 
 const Login = () => {
+
+  // const {
+  //   register,
+  //   formState : {errors}
+  // } = useForm();
+
+
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -20,7 +29,7 @@ const Login = () => {
         // window.location.href = "http://localhost:3000/home";
       });
     } catch (err) {
-      alertError(`${err.response.data}`, "Error al iniciar sesión", () => {
+      alertError(`${err.message}`, "Error al iniciar sesión", () => {
         console.log(err);
       });
     }
@@ -48,11 +57,20 @@ const Login = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 name="email"
+                // {...register("email", {
+                //   required: true,
+                //   maxLength: 100,
+                //   minLength: 10,
+                //   pattern: validationsFields.email,
+                // })}
                 onChange={handleChange}
               />
-              <div id="emailHelp" className="form-text">
-                We'll never share your email with anyone else.
-              </div>
+              {/* {errors.email?.type === "required" && (
+                <p className="alertas">{messages.emailError}</p>
+              )}
+              {errors.email?.type === "pattern" && (
+                <p className="alertas">{messages.emailPatternError}</p>
+              )} */}
             </div>
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">

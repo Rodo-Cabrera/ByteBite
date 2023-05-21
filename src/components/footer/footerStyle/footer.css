@@ -1,0 +1,51 @@
+#footer{
+  background: #000000;
+  border-top: white 2px;
+}
+
+.logors {
+  filter: invert();
+}
+
+
+.logors:hover, .logofooter:hover {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes pulse {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  50% {
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+  transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  }
+  @keyframes pulse {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  50% {
+  -webkit-transform: scale3d(1.55, 1.55, 1.55);
+  transform: scale3d(1.55, 1.55, 1.55);
+  }
+  100% {
+  -webkit-transform: scale3d(1.55, 1.55, 1.55);
+  transform: scale3d(1.55, 1.55, 1.55);
+  }
+  } 
+
+  .logoFooter{
+    margin-top: 6rem;
+    
+  }
