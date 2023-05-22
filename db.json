@@ -1,0 +1,95 @@
+{
+"videoCards": [
+    {
+      "id": 1,
+      "name": "Asus TUF - GeForce RTX 3080",
+      "description": "La Nvidia GeForce RTX 3080 es una tarjeta de video de alta gama lanzada en 2020. Ofrece un rendimiento de gráficos excepcional y está diseñada para jugar videojuegos en resolución 4K a velocidades de fotogramas altas y sin problemas.",
+      "price": 1499.99,
+      "img": "https://d22fxaf9t8d39k.cloudfront.net/1f932f001869aee5be1ffe0ee1295345a6ddb8dd387c48caf3cfa75369306563152710.png",
+      "alt": "Asus TUF - Nvidia GeForce RTX 3080",
+      "category": "videocards"
+    },
+    {
+      "id": 2,
+      "name": "AMD Radeon RX 6800 XT",
+      "description":"La tarjeta XT gráfica AMD Radeon™ RX 6800 XT, potenciada con la arquitectura AMD RDNA™ 2 y equipada con 72 potentes unidades de procesamiento mejoradas, 128MB de la flamante tecnología AMD Infinity Cache y 16GB de memoria GDDR6 dedicada, está diseñada para alcanzar velocidades de cuadros ultraaltas y jugar en 4K con una calidad deslumbrante.",
+      "price": 999.99,
+      "img": "https://dlcdnwebimgs.asus.com/gain/ad0b64de-0d9d-496a-aa22-37d3de22e5c2/w800",
+      "alt": "Asus - Radeon RX 6800 XT",
+      "category": "videocards"
+    },
+    {
+      "id": 3,
+      "name": "Asus TUF - GeForce RTX 3070",
+      "description": "Las tarjetas gráficas de la familia GeForce RTX™ 3070 cuentan con tecnología Ampere, la arquitectura RTX de segunda generación de NVIDIA Se diseñaron con los Núcleos RT y Núcleos Tensor mejorados, nuevos multiprocesadores de transmisión y una memoria de alta velocidad,  ofreciendo la potencia que necesitas para los juegos más exigentes. ",
+      "price": 799.99,
+      "img": "https://logg.api.cygnus.market/static/logg/Global/Placa%20de%20Video%20ASUS%20NVIDIA%20GeForce%20RTX%203070%20Ti%20TUF%20Gaming%208GB%20GDDR6X%20PCIe%204.0%20ARGB/3233ecac27ff438197102f7326a1888f.webp",
+      "alt": "Asus TUF - Nvidia GeForce RTX 3070",
+      "category": "videocards"
+    },
+    {
+      "id": 4,
+      "name": "AMD Radeon RX 6700 XT",
+      "description": "La tarjeta gráfica AMD Radeon™ RX 6700 XT, potenciada con la arquitectura AMD RDNA™ 2 y equipada con 40 potentes unidades de procesamiento mejoradas, la flamante tecnología AMD Infinity Cache y 12 GB de memoria GDDR6 dedicada, está diseñada para alcanzar velocidades de cuadros ultraaltas y jugar en 4K con una potencia arrasadora.",
+      "price": 499.99,
+      "img": "https://www.asrock.com/Graphics-Card/photo/Radeon%20RX%206700%20XT%20Challenger%20D%2012GB(M1).png",
+      "alt": "",
+      "category": "videocards"
+    },
+    {
+      "id": 5,
+      "name": "Nvidia GeForce GTX 1660 Super",
+      "description": "La Nvidia GeForce GTX 1660 Super es una tarjeta de video de gama media lanzada en 2019. Utiliza la arquitectura Turing de Nvidia y cuenta con 1408 núcleos CUDA. Tiene una velocidad de reloj base de 1530 MHz y una velocidad de reloj de impulso de 1785 MHz. También cuenta con 6 GB de memoria GDDR6 con una velocidad de memoria de 14 Gbps y una interfaz de memoria de 192 bits. Tiene un consumo de energía máximo de 125 vatios. En términos de rendimiento, la Nvidia GeForce GTX 1660 Super es capaz de reproducir videojuegos en resolución 1080p a velocidades de fotogramas altas y sin problemas.",
+      "price": 279.99,
+      "img": "https://www.asus.com/media/global/products/uwmuky2lmvxlg0jp/P_setting_xxx_0_90_end_692.png",
+      "alt": "Nvidia GeForce GTX 1660 Super",
+      "category": "videocards"
+    },
+    {
+      "id": 6,
+      "name": "AMD Radeon RX 6600 XT",
+      "description": "Con la innovadora arquitectura AMD RDNA™ 2, diseñada para ofrecer la mejor experiencia de juego en 1080p. Nuevas funciones, la eficiencia receptiva y un ecosistema de juegos ampliamente avanzado elevan la experiencia de la serie AMD Radeon™ RX 6600 para garantizar su éxito en todos sus juegos.",
+      "price": 349.99,
+      "img": "https://www.venex.com.ar/products_images/1662060254_challenger.png",
+      "alt": "AMD Radeon RX 6600 XT",
+      "category": "videocards"
+    },
+    {
+      "id": 7,
+      "name": "Nvidia GeForce GTX 1050 Ti",
+      "description": "La Nvidia GeForce GTX 1050 Ti es una tarjeta gráfica de gama media-baja lanzada en 2016. Utiliza la arquitectura Pascal de Nvidia y cuenta con 768 núcleos CUDA. Tiene una velocidad de reloj base de 1290 MHz y una velocidad de reloj de impulso de 1392 MHz. Cuenta con 4 GB de memoria GDDR5 con una velocidad de memoria de 7 Gbps y una interfaz de memoria de 128 bits. Su consumo de energía máximo es de 75 vatios.",
+      "price": 149.99,
+      "img": "https://app.contabilium.com/files/explorer/7026/Productos-Servicios/concepto-5400665.png",
+      "alt": "Nvidia GeForce GTX 1050 Ti",
+      "category": "videocards"
+    },
+    {
+      "id": 8,
+      "name": "AMD Radeon RX 5500 XT",
+      "description": "La AMD Radeon RX 5500 XT es una tarjeta gráfica de gama media lanzada en 2019. Utiliza la arquitectura RDNA de AMD y cuenta con 1408 stream processors. Tiene una velocidad de reloj base de 1717 MHz y una velocidad de reloj de impulso de 1845 MHz. Tiene 8 GB de memoria GDDR6 con una velocidad de memoria de 14 Gbps y una interfaz de memoria de 128 bits. Su consumo de energía máximo es de 130 vatios. En términos de rendimiento, la AMD Radeon RX 5500 XT es capaz de reproducir videojuegos en resolución 1080p a velocidades de fotogramas altas y sin problemas.",
+      "price": 199.99,
+      "img": "https://static.gigabyte.com/StaticFile/Image/Global/7011f6c30e0011af8b8f207d23d56e3c/Product/25882/Png",
+      "alt": "AMD Radeon RX 5500 XT",
+      "category": "videocards"
+    },
+    {
+      "id": 9,
+      "name": "Nvidia GeForce GT 710",
+      "description": "La Nvidia GeForce GT 710 es una tarjeta gráfica de gama baja lanzada en 2014. Utiliza la arquitectura Kepler de Nvidia y cuenta con 192 núcleos CUDA. Tiene una velocidad de reloj base de 954 MHz y una velocidad de reloj de impulso de 1000 MHz. Cuenta con 1 GB de memoria DDR3 con una velocidad de memoria de 1,8 Gbps y una interfaz de memoria de 64 bits. Su consumo de energía máximo es de 19 vatios. En términos de rendimiento, la Nvidia GeForce GT 710 es capaz de reproducir videojuegos antiguos o menos exigentes en resolución 1080p, aunque no es adecuada para juegos modernos o muy exigentes. Es compatible con la tecnología Nvidia CUDA, que permite utilizar la tarjeta para acelerar ciertas aplicaciones de software que requieren un procesamiento de gráficos intenso, como la edición de video.",
+      "price": 49.99,
+      "img": "https://www.asus.com/media/global/products/scbqpnrkqnaq6uqw/P_setting_xxx_0_90_end_500.png",
+      "alt": "Nvidia GeForce GT 710",
+      "category": "videocards"
+    },
+    {
+      "id": 10,
+      "name": "AMD Radeon RX 570",
+      "description": "La AMD Radeon RX 570 es una tarjeta gráfica de gama media lanzada en 2017. Utiliza la arquitectura Polaris de AMD y cuenta con 2048 stream processors. Tiene una velocidad de reloj base de 1168 MHz y una velocidad de reloj de impulso de 1244 MHz. La tarjeta también cuenta con 4 u 8 GB de memoria GDDR5 con una velocidad de memoria de 7 Gbps y una interfaz de memoria de 256 bits. Su consumo de energía máximo es de 150 vatios. En términos de rendimiento, la AMD Radeon RX 570 es capaz de reproducir videojuegos en resolución 1080p a velocidades de fotogramas altas y sin problemas. ",
+      "price": 159.99,
+      "img": "https://static.gigabyte.com/StaticFile/Image/Global/dc16a54552dd93a2bf9eef1e9fe29659/Product/17171/png/500",
+      "alt": "AMD Radeon RX 570",
+      "category": "videocards"
+    }
+  ]
+
+}

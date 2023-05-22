@@ -1,0 +1,27 @@
+.products {
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+.products ul {
+  
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      200px,
+      1fr
+    )
+  );
+  gap: 1rem;
+  
+}
+
+.products li {
+  display: flex;
+  flex-direction: column;
+};
