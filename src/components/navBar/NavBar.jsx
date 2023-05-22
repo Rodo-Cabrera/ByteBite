@@ -1,10 +1,12 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import './styles/navBar.css';
 import { Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
+import Login from '../login/Login';
 
 
 
@@ -31,8 +33,15 @@ const NavBar = () => {
 
   };
 
+  const [loginMod, setLoginMod] = useState(false);
+
+  const handleOpenL = () => setLoginMod(true);
+  const handleCloseL = () => setLoginMod(false);
+
+
 
   return (
+<>
     <Navbar
       bg="light"
       expand="lg"
@@ -61,7 +70,7 @@ const NavBar = () => {
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link className="underline nav-link" to="/login">
+              <Link className="underline nav-link" to="/" onClick={handleOpenL}>
                 LogIn
               </Link>
             </Nav.Link>
@@ -81,6 +90,13 @@ const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+    <Modal show={loginMod} onHide={handleCloseL} >
+      <Login/>
+    </Modal>
+
+
+    </>
   );
 }
 
