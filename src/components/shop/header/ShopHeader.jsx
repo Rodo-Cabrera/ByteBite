@@ -1,10 +1,10 @@
 import React from 'react'
 import Filters from '../Filters'
 
-const ShopHeader = ({changeFilters}) => {
+const ShopHeader = () => {
   return (
     <div>
-      <Filters onChange={changeFilters} />
+      <Filters />
     </div>
   );
 }

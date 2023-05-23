@@ -1,4 +1,4 @@
-export function addToCartIcon() {
+export function AddToCartIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ export function addToCartIcon() {
   );
 }
 
-export function removeFromCartIcon() {
+export function RemoveFromCartIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ export function removeFromCartIcon() {
   );
 }
 
-export function clearCartIcon() {
+export function ClearCartIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ export function clearCartIcon() {
   );
 }
 
-export function cartIcon() {
+export function CartIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/login/Login";
 import NavBar from "./components/navBar/NavBar";
@@ -11,6 +12,8 @@ import Home from "./components/home/Home";
 
 const App = () => {
 
+  
+
   return (
     <>
     <div id="App">
@@ -22,7 +25,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/shop" element={<Shop />} />
       </Routes>
-      <Footer id="footer"/>
+        <Footer id="footer" />
     </div>
     </>
   );

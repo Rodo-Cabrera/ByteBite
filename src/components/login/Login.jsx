@@ -1,16 +1,18 @@
-import React, { useState, useForm } from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { alertSuccess, alertError } from "../../utils/alertCustom";
 import { messages } from "../../utils/messages";
 import { endPoint } from "../../utils/endpointsConfig";
 import clientAxios from "../../utils/clientAxios";
 import { validationsFields } from "../../utils/validation";
+import '../register/styles/register.css'
 
 const Login = () => {
 
-  // const {
-  //   register,
-  //   formState : {errors}
-  // } = useForm();
+  const {
+    register,
+    formState : {errors}
+  } = useForm();
 
 
 
@@ -57,20 +59,20 @@ const Login = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 name="email"
-                // {...register("email", {
-                //   required: true,
-                //   maxLength: 100,
-                //   minLength: 10,
-                //   pattern: validationsFields.email,
-                // })}
+                {...register("email", {
+                  required: true,
+                  maxLength: 100,
+                  minLength: 10,
+                  pattern: validationsFields.email,
+                })}
                 onChange={handleChange}
               />
-              {/* {errors.email?.type === "required" && (
+              {errors.email?.type === "required" && (
                 <p className="alertas">{messages.emailError}</p>
               )}
               {errors.email?.type === "pattern" && (
                 <p className="alertas">{messages.emailPatternError}</p>
-              )} */}
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">

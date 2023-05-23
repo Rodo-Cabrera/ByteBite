@@ -1,40 +1,22 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Products from './products/Products'
 import {videoCards as initProducts} from '../../../db.json'
 import ShopHeader from './header/ShopHeader';
+import { useFilters } from '../../hooks/useFilters';
 
-const useFilters = () => {
-
-  const [filter, setFilter] = useState({
-    category: "all",
-    minPrice: 0,
-  });
-
-  const productFilter = (videoCards) => {
-    return videoCards.filter((product) => {
-      return (
-        product.price >= filter.minPrice &&
-        (filter.category === "all" || product.category === filter.category)
-      );
-    });
-  };
-
-  return {productFilter, setFilter}
-
-}
 
 
 const Shop = () => {
 
   const [videoCards] = useState(initProducts);
   
-  const { productFilter, setFilter } = useFilters();
+  const { productFilter } = useFilters();
 
   const filteredProducts = productFilter(videoCards)
 
   return (
     <div>
-      <ShopHeader changeFilters={setFilter} />
+      <ShopHeader />
       <Products products={filteredProducts} />
     </div>
   );

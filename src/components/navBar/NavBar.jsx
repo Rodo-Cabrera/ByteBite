@@ -7,6 +7,7 @@ import './styles/navBar.css';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import Login from '../login/Login';
+import Cart from '../shop/cart/Cart';
 
 
 
@@ -87,7 +88,8 @@ const NavBar = () => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-        </Navbar.Collapse>
+          </Navbar.Collapse>
+          <Cart/>
       </Container>
     </Navbar>
 

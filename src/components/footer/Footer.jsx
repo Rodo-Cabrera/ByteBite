@@ -1,10 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useFilters } from '../../hooks/useFilters';
+import { useCart } from '../../hooks/useCart';
 import ('./footerStyle/footer.css');
 
 
 
 const Footer = () => {
+
+  const { filter } = useFilters();
+  const { cart } = useCart()
+
   return (
     <div className="container-fluid" id="footer">
       <div className="row p-4 pb-2 text-white">
@@ -18,6 +24,8 @@ const Footer = () => {
               height="153"
             />
           </Link>
+          {JSON.stringify(filter, null, 2)}
+          {JSON.stringify(cart, null, 2)}
         </div>
         <div className="col-sm-12 col-md-4 col-lg-4 text-center mt-5">
           <div className="mb-2">
@@ -45,18 +53,12 @@ const Footer = () => {
             </a>
           </div>
           <div className="mb-2">
-            <a
-              className="text-decoration-none juegos"
-              href=""
-            >
+            <a className="text-decoration-none juegos" href="">
               Uplay store
             </a>
           </div>
           <div className="mb-2">
-            <a
-              className="text-decoration-none juegos"
-              href=""
-            >
+            <a className="text-decoration-none juegos" href="">
               Prime Games store
             </a>
           </div>
