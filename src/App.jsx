@@ -8,6 +8,7 @@ import Shop from "./components/shop/Shop";
 import Footer from "./components/footer/Footer";
 import './app.css'
 import Home from "./components/home/Home";
+import CreateProduct from './components/admin/products/CreateProduct';
 
 
 const App = () => {
@@ -18,7 +19,8 @@ const App = () => {
     <>
     <div id="App">
       <NavBar />
-      <Routes>
+        <Routes>
+          <Route path="/createprod" element={ <CreateProduct/> } />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/" element={<Home/>} index="true" />
         <Route path="/login" element={<Login />} />

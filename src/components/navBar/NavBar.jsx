@@ -49,8 +49,10 @@ const NavBar = () => {
       className="navContainer sticky-top shadow"
       ref={navRef}
     >
-      <Container>
-        <Navbar.Brand href="#home">ByteBite</Navbar.Brand>
+        <Container>
+          <Link to="/">
+            <Navbar.Brand>ByteBite</Navbar.Brand>
+          </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
