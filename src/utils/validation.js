@@ -4,6 +4,8 @@ export const validationsFields = {
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
   email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
   age: /^\d+$/,
+  price: /^\d+$/,
+  stock: /^\d+$/,
 };
 
 export const ageValidator = (value) => {
@@ -22,4 +24,23 @@ export const isValidCountry = (value) => {
     "Chile",
   ];
   return validCountries.includes(value);
+};
+
+export const isValidCategory = (value) => {
+  const validCategories = [
+    'RAM',
+    'VGA',
+    'MONITOR',
+    'MOUSE',
+    'KEYBOARD',
+    'COLER',
+    'AUDIO',
+    'GAMER-CHAIR',
+    'PROCESSOR',
+    'CASE',
+    'PWSUPPLY',
+    'MOTHERBOARD',
+    'PC',
+  ];
+  return validCategories.includes(value) || 'Categoría inválida';
 };

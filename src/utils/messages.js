@@ -59,5 +59,28 @@ export const messages = {
     "rari, pero no te toma el nombre, debes llamarte raro, como el ububueububue OSSAS",
   errorMail: "pone bien el mail culiao",
   logSuccess: "",
+
+
+  //Mensajes para carga de productos
+  prodError: "Debes escribir un nombre al producto",
+  prodMaxLengthError: "El nombre del producto no puede superar los 40 caracteres",
+  prodMinLengthError: "El nombre del producto debe contener al menos 5 caracteres",
+  prodIconError: "Debes seleccionar al menos una imagen para usar como ícono del producto",
+  prodIconMinLengthError: "No puedes seleccionar más de una imagen",
+  prodDescError: "Debes agregar una descripción al producto",
+  prodDescMaxLengthError: "La descipción del producto no puede superar los 1000 caracteres",
+  prodDescMinLengthError: "La descipción del producto debe contener al menos 20 caracteres",
+  prodImgError: "Debes seleccionar al menos una imagen",
+  prodImgMaxLengthError: "Puedes seleccionar hasta 4 imágenes",
+  categoryError: "Debes seleccionar una categoría",
+  prodPriceError: "Debes ponerle un precio a tu producto",
+  prodPriceMaxLengthError: "El precio del producto no puede superar los 6 caracteres",
+  prodPriceMinLengthError: "El precio del producto debe contener al menos 1 número",
+  prodPriceMatchError: "El precio debe ser escrito en números",
+  prodStockError: "Debes poner la cantidad de producto en stock",
+  prodStockMinLengthError: "El stock debe tener como mínimo un (1) número",
+  prodStockMaxLengthError: "El stock del producto no puede superar los 4 caracteres",
+  prodStockMatchError: "Debes escribir la cantidad de productos en números",
+  
 };
 

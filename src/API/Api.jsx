@@ -12,7 +12,11 @@ export const createProduct = async (prodData) => {
 
 export const uploadImage = async (imgForm) => {
   try {
-    return await axios.post(`${DBURL}${productEndpoints.uploadImage}`, imgForm)
+    return await axios.post(`${DBURL}${productEndpoints.uploadImage}`, imgForm,
+      {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+    
   } catch (error) {
     console.log(error);
   }
