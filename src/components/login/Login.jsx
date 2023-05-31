@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { alertSuccess, alertError } from "../../utils/alertCustom";
 import { messages } from "../../utils/messages";
-import { endPoint } from "../../utils/endpointsConfig";
+import { endPointUsers } from "../../utils/endpointsConfig";
 import clientAxios from "../../utils/clientAxios";
 import { validationsFields } from "../../utils/validation";
 import '../register/styles/register.css'
+import { userContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -15,6 +17,9 @@ const Login = () => {
   } = useForm();
 
 
+  // const { setUser } = useContext(userContext);
+
+  const [user, setUser] = useState(null);
 
   const [userData, setUserData] = useState({
     email: "",
@@ -24,12 +29,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await clientAxios.post(`${endPoint.login}`, userData);
-      console.log(data);
+      const { data } = await clientAxios.post(`${endPointUsers.login}`, userData);
       localStorage.setItem("token", data?.token);
-      alertSuccess(messages.logSuccess, data.msg, () => {
-        // window.location.href = "http://localhost:3000/home";
-      });
+      localStorage.setItem("payload", data?.payload);     
+      alertSuccess(messages.logSuccess, data.msg);
     } catch (err) {
       alertError(`${err.message}`, "Error al iniciar sesión", () => {
         console.log(err);

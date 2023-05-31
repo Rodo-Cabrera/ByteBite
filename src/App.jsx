@@ -9,6 +9,8 @@ import Footer from "./components/footer/Footer";
 import './app.css'
 import Home from "./components/home/Home";
 import CreateProduct from './components/admin/products/CreateProduct';
+import { AuthProvider } from './context/AuthContext';
+import UserList from './components/admin/users/UserList';
 
 
 const App = () => {
@@ -17,18 +19,21 @@ const App = () => {
 
   return (
     <>
-    <div id="App">
-      <NavBar />
-        <Routes>
-          <Route path="/createprod" element={ <CreateProduct/> } />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/" element={<Home/>} index="true" />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/shop" element={<Shop />} />
-      </Routes>
-        <Footer id="footer" />
-    </div>
+      <AuthProvider>
+          <div id="App">
+            <NavBar />
+              <Routes>
+                <Route path="/createprod" element={ <CreateProduct/> } />
+                <Route path="/contact" element={<ContactForm />} />
+                <Route path="/" element={<Home/>} index="true" />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/userlist" element={<UserList />}/>
+              </Routes>
+            <Footer id="footer" />
+          </div>
+      </AuthProvider>
     </>
   );
 

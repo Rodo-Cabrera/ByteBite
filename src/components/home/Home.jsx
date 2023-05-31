@@ -1,6 +1,11 @@
 import React from 'react'
+import { useAuth } from '../../hooks/useAuth'
 
 const Home = () => {
+
+  const { user } = useAuth();
+  console.log(user);
+
   return (
     <div>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, rerum cupiditate fugiat ad ipsum dolores, dolor a molestias eveniet labore, reprehenderit quis ut nobis ratione fuga praesentium harum. Dicta, saepe!

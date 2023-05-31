@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { endPoints, productEndpoints } from '../utils/endpointsConfig';
+import { endPoints, productEndpoints, endPointAdmin } from '../utils/endpointsConfig';
 const DBURL = import.meta.env.VITE_URL_BASE;
 
 export const createProduct = async (prodData) => {
@@ -28,4 +28,17 @@ export const uploadIcon = async (iconForm) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+
+export const getAllusers = async (token) => {
+  try {
+    return await axios.get(`${DBURL}${endPointAdmin.getAllUsers}`, {
+      headers: {
+        "access-token": token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

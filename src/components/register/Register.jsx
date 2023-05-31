@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { alertSuccess, alertError } from "../../utils/alertCustom";
 import { messages } from "../../utils/messages";
-import { endPoint } from "../../utils/endpointsConfig";
+import { endPoints } from "../../utils/endpointsConfig";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ageValidator, validationsFields } from "../../utils/validation"
