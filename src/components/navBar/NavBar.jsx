@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import Login from '../login/Login';
 import Cart from '../shop/cart/Cart';
+import { useAuth } from '../../hooks/useAuth';
 
 
 
@@ -34,6 +35,8 @@ const NavBar = () => {
 
   };
 
+  const {isLogged, logout, user} = useAuth()
+
   const [loginMod, setLoginMod] = useState(false);
 
   const handleOpenL = () => setLoginMod(true);
@@ -42,52 +45,72 @@ const NavBar = () => {
 
 
   return (
-<>
-    <Navbar
-      bg="light"
-      expand="lg"
-      className="navContainer sticky-top shadow"
-      ref={navRef}
-    >
+    <>
+      <Navbar
+        bg="light"
+        expand="lg"
+        className="navContainer sticky-top shadow"
+        ref={navRef}
+      >
         <Container>
           <Link to="/">
             <Navbar.Brand>ByteBite</Navbar.Brand>
           </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link id="navbarNav">
-              <Link className="underline nav-link" to="/aboutUs">
-                Nosotros
-              </Link>
-            </Nav.Link>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link id="navbarNav">
+                <Link className="underline nav-link" to="/aboutUs">
+                  Nosotros
+                </Link>
+              </Nav.Link>
 
-            <Nav.Link>
-              <Link className="underline nav-link" to="/contact">
-                Contacto
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link className="underline nav-link" to="/register">
-                Registrarse
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link className="underline nav-link" to="/" onClick={handleOpenL}>
-                LogIn
-              </Link>
-            </Nav.Link>
-          </Nav>
+              <Nav.Link>
+                <Link className="underline nav-link" to="/contact">
+                  Contacto
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link className="underline nav-link" to="/register">
+                  Registrarse
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link className="underline nav-link" to="/userlist">
+                  Lista de usuarios
+                </Link>
+              </Nav.Link>
+              {isLogged ? (
+                <div className="user">
+                  <Nav.Link>
+                    <Link
+                      className="underline nav-link"
+                      to="/"
+                      onClick={() => logout()}
+                    >
+                      LogOut
+                    </Link>
+                  </Nav.Link>
+                </div>
+              ) : (
+                <Nav.Link>
+                  <Link className="underline nav-link" onClick={handleOpenL}>
+                    LogIn
+                  </Link>
+                </Nav.Link>
+              )}
+            </Nav>
           </Navbar.Collapse>
-          <Cart/>
-      </Container>
-    </Navbar>
+          <div className='user'>
+            {isLogged ? <strong>{user}</strong> : <p></p>}
+            <Cart />
+          </div>
+        </Container>
+      </Navbar>
 
-    <Modal show={loginMod} onHide={handleCloseL} >
-      <Login/>
-    </Modal>
-
-
+      <Modal show={loginMod} onHide={handleCloseL}>
+        <Login />
+      </Modal>
     </>
   );
 }

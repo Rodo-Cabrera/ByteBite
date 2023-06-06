@@ -16,6 +16,14 @@
   background-color: #3e4570;
 }
 
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  text-align: center;
+  justify-content: flex-end;
+}
+
 .underline {
   display: inline-block;
   position: relative;

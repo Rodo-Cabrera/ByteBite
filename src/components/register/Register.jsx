@@ -37,15 +37,9 @@ const Register = () => {
       });
       return;
     }
-    alertSuccess(messages.regSuccess, messages.tittleSuccesslog, () => {
-      console.log("test success");
-    });
-
-    console.log(userData, URL_BASE);
-
     try {
       const { data } = await axios.post(
-        `${URL_BASE}${endPoint.register}/create-user`,
+        `${URL_BASE}${endPoints.register}`,
         userData
       );
       alertSuccess(messages.regSuccess, `Bienvenido, ${data.name}!`, () => {

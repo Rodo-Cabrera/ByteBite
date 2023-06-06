@@ -10,7 +10,6 @@ const clientAxios = axios.create({
     'Content-Type': 'application/json; charset=UTF-8',
     'access-token': token,
   }
-
 });
 
 export default clientAxios

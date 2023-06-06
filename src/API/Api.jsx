@@ -42,3 +42,43 @@ export const getAllusers = async (token) => {
     console.log(error);
   }
 };
+
+export const editUser = async (token) => {
+  try {
+    return await axios.patch(`${DBURL}${endPointAdmin.editUser}`, {}, {
+      headers: {
+        "access-token": token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const disableUser = async (token, id) => {
+  try {
+    return await axios.patch(`${DBURL}${endPointAdmin.disableUser}/${id}`,{}, {
+      headers: {
+        "access-token": token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const ableUser = async (token, id) => {
+  try {
+    return await axios.patch(
+      `${DBURL}${endPointAdmin.ableUser}/${id}`,
+      {},
+      {
+        headers: {
+          "access-token": token,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,6 +1,6 @@
 export const endPoints = {
   login: '/api/login',
-  register: '/user/create-user',
+  register: '/users/create-user',
   createProduct: '/prod/create-product'
 };
 
@@ -15,5 +15,8 @@ export const endPointUsers = {
 };
 
 export const endPointAdmin = {
-  getAllUsers: "/users/get-users"
+  getAllUsers: "/users/get-users",
+  editUser: "/users/edit-user",
+  disableUser: "/users/disable-user",
+  ableUser:"/users/unban-user"
 }

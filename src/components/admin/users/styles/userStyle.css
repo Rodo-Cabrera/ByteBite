@@ -1,0 +1,4 @@
+.btnEdit, .btnDelete, .btnAble {
+  --bs-btn-bg: none;
+  --bs-btn-border-width: 0px
+}
