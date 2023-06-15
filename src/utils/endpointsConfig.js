@@ -12,11 +12,13 @@ export const productEndpoints = {
 export const endPointUsers = {
   register: "/users",
   login: "/login",
+  getUser: "/users/get-user-by-id",
 };
 
 export const endPointAdmin = {
   getAllUsers: "/users/get-users",
   editUser: "/users/edit-user",
   disableUser: "/users/disable-user",
-  ableUser:"/users/unban-user"
+  ableUser: "/users/unban-user",
+  adminUser: "/users/user-admin"
 }

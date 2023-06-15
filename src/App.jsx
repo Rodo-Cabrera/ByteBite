@@ -11,6 +11,7 @@ import Home from "./components/home/Home";
 import CreateProduct from './components/admin/products/CreateProduct';
 import { AuthProvider, userContext } from './context/AuthContext';
 import UserList from './components/admin/users/UserList';
+import Users from './components/pages/Users';
 
 
 const App = () => {
@@ -29,7 +30,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/shop" element={<Shop />} />
-                <Route path="/userlist" element={<UserList />} token={token} />
+                <Route path="/userlist" element={<Users />} token={token} />
               </Routes>
             <Footer id="footer" />
           </div>

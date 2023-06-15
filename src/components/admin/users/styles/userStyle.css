@@ -2,3 +2,23 @@
   --bs-btn-bg: none;
   --bs-btn-border-width: 0px
 }
+
+.panel {
+  background-color: indigo;
+  max-height: 100%;
+  width: 300px;
+  color: white;
+}
+
+.avatar {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.user {
+  display: block;
+  margin: 0 auto;
+}

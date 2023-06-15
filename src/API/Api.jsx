@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { endPoints, productEndpoints, endPointAdmin } from '../utils/endpointsConfig';
+import { endPoints, productEndpoints, endPointAdmin, endPointUsers } from '../utils/endpointsConfig';
+import { useAuth } from '../hooks/useAuth';
 const DBURL = import.meta.env.VITE_URL_BASE;
 
 export const createProduct = async (prodData) => {
@@ -43,6 +44,20 @@ export const getAllusers = async (token) => {
   }
 };
 
+
+
+export const getOneUser = async (token, id) => {
+  try {
+    return await axios.get(`${DBURL}${endPointUsers.getUser}/${id}`, {
+      headers: {
+        "access-token": token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const editUser = async (token) => {
   try {
     return await axios.patch(`${DBURL}${endPointAdmin.editUser}`, {}, {
@@ -71,6 +86,22 @@ export const ableUser = async (token, id) => {
   try {
     return await axios.patch(
       `${DBURL}${endPointAdmin.ableUser}/${id}`,
+      {},
+      {
+        headers: {
+          "access-token": token,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const adminUser = async (token, id) => {
+  try {
+    return await axios.patch(
+      `${DBURL}${endPointAdmin.adminUser}/${id}`,
       {},
       {
         headers: {

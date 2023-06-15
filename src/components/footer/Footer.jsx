@@ -29,45 +29,48 @@ const Footer = () => {
         </div>
         <div className="col-sm-12 col-md-4 col-lg-4 text-center mt-5">
           <div className="mb-2">
-            <a
+            <Link
               className="text-decoration-none juegos"
-              href="./html/Error404.html"
+              to="./html/Error404.html"
             >
               Steam Store
-            </a>
+            </Link>
           </div>
           <div className="mb-2">
-            <a
+            <Link
               className="text-decoration-none juegos"
-              href="./html/Error404.html"
+              to="./html/Error404.html"
             >
               Epic Games store
-            </a>
+            </Link>
           </div>
           <div className="mb-2">
-            <a
+            <Link
               className="text-decoration-none juegos"
-              href="./html/Error404.html"
+              to="./html/Error404.html"
             >
               Origin store
-            </a>
+            </Link>
           </div>
           <div className="mb-2">
-            <a className="text-decoration-none juegos" href="">
+            <Link className="text-decoration-none juegos" to="">
               Uplay store
-            </a>
+            </Link>
           </div>
           <div className="mb-2">
-            <a className="text-decoration-none juegos" href="">
+            <Link className="text-decoration-none juegos" to="">
               Prime Games store
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col-sm-12 col-md-4 col-lg-4 text-center bloke">
           <p className="h5 mb-3">Nuestras redes</p>
           <div className="redes row row-cols-md-1 row-cols-sm-4">
             <div className="col mb-2">
-              <a href="./html/Error404.html">
+              <Link
+                to="https://www.facebook.com/rodo.cabrera.5"
+                target="_blank"
+              >
                 <i className="fa-brands fa-facebook fa-2x fa-x1">
                   <img
                     className="figure-img img-fluid logors rounded mx-auto icon"
@@ -76,10 +79,10 @@ const Footer = () => {
                     alt="logo facebook"
                   />
                 </i>
-              </a>
+              </Link>
             </div>
             <div className="col mb-2">
-              <a href="./html/Error404.html">
+              <Link to="https://www.instagram.com/cabrerarodo/" target="_blank">
                 <i className="fa-brands fa-instagram fa-2x fa-x1">
                   <img
                     className="figure-img img-fluid logors rounded mx-auto icon"
@@ -88,10 +91,10 @@ const Footer = () => {
                     alt="logo instagram"
                   />
                 </i>
-              </a>
+              </Link>
             </div>
             <div className="col mb-2">
-              <a href="./html/Error404.html">
+              <Link to="https://twitter.com/RodoC007" target="_blank">
                 <i className="fa-brands fa-twitter-sqare fa-2x fa-x1">
                   <img
                     className="figure-img img-fluid logors rounded mx-auto icon"
@@ -100,10 +103,10 @@ const Footer = () => {
                     alt="logo twitter"
                   />
                 </i>
-              </a>
+              </Link>
             </div>
             <div className="col mb-2">
-              <a href="./html/Error404.html">
+              <Link to="https://wa.me/5493865336498" target="_blank">
                 <i className="fa-brands fa-whatsapp fa-2x fa-x1">
                   <img
                     className="figure-img img-fluid logors rounded mx-auto icon"
@@ -112,10 +115,10 @@ const Footer = () => {
                     alt="logo whatsapp"
                   />
                 </i>
-              </a>
+              </Link>
             </div>
             <div className="col mb-2">
-              <a href="./html/Error404.html">
+              <Link to="https://github.com/Rodo-Cabrera" target="_blank">
                 <i className="fa-brands fa-whatsapp fa-2x fa-x1">
                   <img
                     className="figure-img img-fluid logors rounded mx-auto icon"
@@ -124,7 +127,7 @@ const Footer = () => {
                     alt="logo github"
                   />
                 </i>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
