@@ -2,13 +2,15 @@ import React, {useEffect, useRef, useState} from 'react';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import {Button} from 'react-bootstrap';
 import './styles/navBar.css';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import Login from '../login/Login';
 import Cart from '../shop/cart/Cart';
 import { useAuth } from '../../hooks/useAuth';
+import UserPanel from '../userProfile/UserPanel';
 
 
 
@@ -32,22 +34,25 @@ const NavBar = () => {
     } else {
       nav.classList.remove("opacity-75"); 
     }
-
   };
 
-  const {isLogged, logout, user} = useAuth()
+  const { isLogged, logout, actualUser } = useAuth()
 
   const [loginMod, setLoginMod] = useState(false);
 
   const handleOpenL = () => setLoginMod(true);
   const handleCloseL = () => setLoginMod(false);
 
+  const [profile, setProfile] = useState(false);
+
+  const handleProfile = () => setProfile(true);
+  const handleCloseProfile = () => setProfile(false);
+
 
 
   return (
     <>
       <Navbar
-        bg="light"
         expand="lg"
         className="navContainer sticky-top shadow"
         ref={navRef}
@@ -60,13 +65,13 @@ const NavBar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link id="navbarNav">
-                <Link className="underline nav-link" to="/aboutUs">
+                <Link className="underline nav-link " to="/aboutUs">
                   Nosotros
                 </Link>
               </Nav.Link>
 
               <Nav.Link>
-                <Link className="underline nav-link" to="/contact">
+                <Link className="underline nav-link " to="/contact">
                   Contacto
                 </Link>
               </Nav.Link>
@@ -101,8 +106,21 @@ const NavBar = () => {
               )}
             </Nav>
           </Navbar.Collapse>
-          <div className='user'>
-            {isLogged ? <strong>{user}</strong> : <p></p>}
+          <div className="user-column">
+            {actualUser.length > 0 && (
+              <div className="user">
+                <div>
+                  <Button className="profileButton" onClick={handleProfile}>
+                    <img
+                      src={actualUser[0].avatar}
+                      alt={actualUser[0].avatar}
+                      className="navAvatar"
+                    />
+                  </Button>
+                </div>
+                <strong>{actualUser[0].name}</strong>
+              </div>
+            )}
             <Cart />
           </div>
         </Container>
@@ -111,8 +129,36 @@ const NavBar = () => {
       <Modal show={loginMod} onHide={handleCloseL}>
         <Login />
       </Modal>
+      <Offcanvas
+        show={profile}
+        onHide={handleCloseProfile}
+        placement="end"
+        className="offcanvaProfile"
+      >
+        <Button
+          className="ms-auto mx-3 my-3 closeButton"
+          onClick={handleCloseProfile}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-x-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+          </svg>
+        </Button>
+        <Offcanvas.Title className="text-center my-2">
+          Perfil de usuario
+        </Offcanvas.Title>
+        <UserPanel />
+      </Offcanvas>
     </>
   );
 }
+
 
 export default NavBar

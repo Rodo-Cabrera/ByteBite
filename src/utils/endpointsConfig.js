@@ -20,5 +20,6 @@ export const endPointAdmin = {
   editUser: "/users/edit-user",
   disableUser: "/users/disable-user",
   ableUser: "/users/unban-user",
-  adminUser: "/users/user-admin"
+  adminUser: "/users/user-admin",
+  clientUser: "/users/user-client"
 }

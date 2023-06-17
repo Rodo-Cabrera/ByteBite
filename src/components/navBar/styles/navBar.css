@@ -1,7 +1,9 @@
 .navContainer {
   margin-bottom: 1rem;
-  background-color: #ffc3c3 !important;
+  background-color: #000000 !important;
+  color: white;
 }
+
 
 .navLogo{
   width: 4rem ;
@@ -17,18 +19,46 @@
 }
 
 .user {
-  display: flex;
+  display: block;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
   text-align: center;
   justify-content: flex-end;
 }
+
 
 .underline {
   display: inline-block;
   position: relative;
   text-shadow: -1px 0px 11px rgba(255,255,255,0.74);
   font-weight: bold;
+  color: white !important;
+}
+.profileButton {
+  --bs-btn-color: none !important;
+  --bs-btn-bg: none !important;
+  --bs-btn-border-color: none !important;
+  --bs-btn-hover-bg: none !important;
+  --bs-btn-active-bg: none !important;
+}
+
+.offcanvaProfile {
+  --bs-offcanvas-bg: black !important;
+  color: white;
+}
+
+.closeButton {
+  --bs-btn-bg: none;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-bg: none;
+  --bs-btn-hover-border-color: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-active-border-color: none;
+  --bs-btn-active-color: red;
+}
+
+.closeButton:hover {
+  color: red;
 }
 
 .underline::after {
@@ -38,7 +68,7 @@
   height: 4px;
   bottom: 0px;
   left: 0;
-  background-color: #3e4570;
+  background-color: #ffd900;
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-in-out;
@@ -47,4 +77,10 @@
 .underline:hover::after {
   transform: scaleX(1);
   transform-origin:bottom left;
+}
+
+.navAvatar {
+  width: 2rem;
+  height: 30px;
+  border-radius: 100%;
 }

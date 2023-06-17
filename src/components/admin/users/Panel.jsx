@@ -1,40 +1,25 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import './styles/userStyle.css'
 import { getOneUser } from '../../../API/Api'
 import { Accordion, Button } from 'react-bootstrap'
+import { useAuth } from '../../../hooks/useAuth'
 
-const Panel = (props) => {
+const Panel = () => {
 
-  const { id, token } = props;
 
-  const [actualUser, setActualUser] = useState([]);
-
-  
-  useEffect(() => {
-    
-    const resp = async () => {
-      if (token) {
-        await getOneUser(token, id)
-          .then((response) => {
-            setActualUser([response.data]);
-          })
-          .catch((error) => console.log(error))
-      }
-    };
-        resp()
-  }, [id, token])
+  const {actualUser} = useAuth()
   
 
   return (
     <div className="panel">
       <div className="user">
-        {actualUser?.map((user) => (
+        {actualUser.length > 0 &&( 
           <div className="my-3">
-            <img className="avatar" src={user.avatar} alt={user.avatar} />
-            <h1>{user.name}</h1>
-            <p>{user.role}</p>
+            <img className="avatar" src={actualUser[0].avatar} alt={actualUser[0].avatar} />
+            <h1>{actualUser[0].name}</h1>
+            <p>{actualUser[0].role}</p>
           </div>
-        ))}
+        )}
       </div>
 
       <div className="userOptions mx-1">

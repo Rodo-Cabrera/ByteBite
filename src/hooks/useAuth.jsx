@@ -1,3 +1,4 @@
+import { getOneUser } from "../API/Api";
 import { userContext } from "../context/AuthContext";
 import { useContext, useCallback, useState, useEffect } from "react";
 
@@ -7,6 +8,20 @@ export const useAuth = () => {
   const [user, setUser] = useState(null)
   const [role, setRole] = useState(null)
   const [userId, setUserId] = useState(null)
+  const [actualUser, setActualUser] = useState([])
+
+   useEffect(() => {
+     const resp = async () => {
+       if (token) {
+         await getOneUser(token, userId)
+           .then((response) => {
+             setActualUser([response.data]);
+           })
+           .catch((error) => console.log(error));
+       }
+     };
+     resp()
+   }, [token, userId]);
 
 
   useEffect(() => {
@@ -52,6 +67,7 @@ export const useAuth = () => {
     logout,
     user,
     role,
-    userId
+    userId,
+    actualUser
   }
 };

@@ -113,3 +113,19 @@ export const adminUser = async (token, id) => {
     console.log(error);
   }
 };
+
+export const clientUser = async (token, id) => {
+  try {
+    return await axios.patch(
+      `${DBURL}${endPointAdmin.clientUser}/${id}`,
+      {},
+      {
+        headers: {
+          "access-token": token,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
