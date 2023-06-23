@@ -28,7 +28,6 @@ export const useAuth = () => {
     const storedUser = localStorage.getItem('payload');
     if (storedUser) {
       setUser(JSON.parse(storedUser).name)
-      console.log(user);
     }
   })
 

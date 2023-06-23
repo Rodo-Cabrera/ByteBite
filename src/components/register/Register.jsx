@@ -33,7 +33,6 @@ const Register = () => {
    
     if (userData.password !== userData.password2) {
       alertError(messages.pwMatchError, messages.logError, () => {
-        console.log("test PwCheck");
       });
       return;
     }

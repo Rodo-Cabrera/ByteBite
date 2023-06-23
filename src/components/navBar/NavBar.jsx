@@ -11,6 +11,8 @@ import Login from '../login/Login';
 import Cart from '../shop/cart/Cart';
 import { useAuth } from '../../hooks/useAuth';
 import UserPanel from '../userProfile/UserPanel';
+import { Tooltip } from "react-tooltip";
+
 
 
 
@@ -109,8 +111,14 @@ const NavBar = () => {
           <div className="user-column">
             {actualUser.length > 0 && (
               <div className="user">
+                <Tooltip id="userTooltip" />
                 <div>
-                  <Button className="profileButton" onClick={handleProfile}>
+                  <Button
+                    className="profileButton"
+                    onClick={handleProfile}
+                    data-tooltip-id="userTooltip"
+                    data-tooltip-content="Mi perfil"
+                  >
                     <img
                       src={actualUser[0].avatar}
                       alt={actualUser[0].avatar}

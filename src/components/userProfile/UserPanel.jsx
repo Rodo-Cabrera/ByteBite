@@ -14,15 +14,15 @@ const UserPanel = () => {
   return (
     <>
       {actualUser.length > 0 && (
-        <div className="user">
+        <div>
           <Image
             src={actualUser[0].avatar}
             alt={actualUser[0].avatar}
             roundedCircle
-            className="userAvatar my-4"
+            className="userAvatar my-4 user"
           />
-          <div className="userInfo">
-            <p>{actualUser[0].role}</p>
+          <div className="userInfo mx-3">
+            <p className='user'>{actualUser[0].role}</p>
             <h3>
               {actualUser[0].name} {actualUser[0].lastName}
             </h3>
@@ -33,7 +33,7 @@ const UserPanel = () => {
               {actualUser[0].disabled === true && <p>Usuario bloqueado</p>}
             </h6>
           </div>
-          <Button className="btnEdit btn-outline-success">
+          <Button className="btnEdit btn-outline-success user">
             Editar perfil
           </Button>
         </div>

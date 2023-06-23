@@ -1,41 +1,42 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getAllusers, disableUser, ableUser, adminUser, clientUser } from "../../../API/Api";
-import { Table, Button, Container } from "react-bootstrap";
+import React, { useContext, useState, useEffect } from "react";
 import { userContext } from "../../../context/AuthContext";
-import './styles/userStyle.css'
+import {
+  getActiveUsers,
+  disableUser,
+  ableUser,
+  adminUser,
+  clientUser,
+} from "../../../API/Api";
+
+import { Container, Table, Button } from "react-bootstrap";
 import { useAuth } from "../../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 
-
-
-const UserList = () => {
+const ActiveUsers = () => {
   const [users, setUsers] = useState(null);
 
-  const { token } = useContext(userContext)
+  const { token } = useContext(userContext);
 
   const { role } = useAuth();
 
-  console.log(role);
-
-   const handleChange = () => {
-     setUsers(null);
-     const resp = async () => {
-       if (token) {
-         await getAllusers(token)
-           .then((response) => {
-             setUsers(response.data)
-           })
-           .catch((error) => console.log(error))
-       }
-     };
-     resp()
-   };
-  
+  const handleChange = () => {
+    setUsers(null);
+    const resp = async () => {
+      if (token) {
+        await getActiveUsers(token)
+          .then((response) => {
+            setUsers(response.data);
+          })
+          .catch((error) => console.log(error));
+      }
+    };
+    resp();
+  };
 
   useEffect(() => {
     const resp = async () => {
-      if (token) {       
-        await getAllusers(token)
+      if (token) {
+        await getActiveUsers(token)
           .then((response) => {
             setUsers(response.data);
           })
@@ -47,14 +48,14 @@ const UserList = () => {
 
   const handleDisableUser = async (id) => {
     if (token) {
-      try {        
+      try {
         await disableUser(token, id);
         handleChange();
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   const handleUnbanUser = async (id) => {
     if (token) {
@@ -90,9 +91,10 @@ const UserList = () => {
   };
 
   return (
-    <div className="list-container container-fluid w-100">
+    <Container>
+      <div>
         <Table>
-          <thead className="text-center t-head sticky-top">
+          <thead className="text-center">
             <th>Id</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -104,7 +106,7 @@ const UserList = () => {
             <th>Ban/able</th>
             {role === "owner" && <th>Admin</th>}
           </thead>
-          <tbody className="text-center t-body">
+          <tbody className="text-center">
             {users?.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
@@ -238,8 +240,9 @@ const UserList = () => {
             ))}
           </tbody>
         </Table>
-    </div>
+      </div>
+    </Container>
   );
 };
 
-export default UserList;
+export default ActiveUsers;

@@ -1,41 +1,43 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getAllusers, disableUser, ableUser, adminUser, clientUser } from "../../../API/Api";
-import { Table, Button, Container } from "react-bootstrap";
-import { userContext } from "../../../context/AuthContext";
-import './styles/userStyle.css'
-import { useAuth } from "../../../hooks/useAuth";
-import { Tooltip } from "react-tooltip";
+import React, { useContext, useState, useEffect } from 'react'
+import {userContext} from "../../../context/AuthContext";
+import {
+  getAdminUsers,
+  disableUser,
+  ableUser,
+  adminUser,
+  clientUser,
+} from "../../../API/Api";
 
+import { Table, Button} from 'react-bootstrap'
+import { useAuth } from '../../../hooks/useAuth';
+import { Tooltip } from 'react-tooltip';
 
+const AdminUsers = () => {
 
-const UserList = () => {
   const [users, setUsers] = useState(null);
 
-  const { token } = useContext(userContext)
+  const { token } = useContext(userContext);
 
   const { role } = useAuth();
 
-  console.log(role);
-
-   const handleChange = () => {
-     setUsers(null);
-     const resp = async () => {
-       if (token) {
-         await getAllusers(token)
-           .then((response) => {
-             setUsers(response.data)
-           })
-           .catch((error) => console.log(error))
-       }
-     };
-     resp()
-   };
-  
+  const handleChange = () => {
+    setUsers(null);
+    const resp = async () => {
+      if (token) {
+        await getAdminUsers(token)
+          .then((response) => {
+            setUsers(response.data);
+          })
+          .catch((error) => console.log(error));
+      }
+    };
+    resp();
+  };
 
   useEffect(() => {
     const resp = async () => {
-      if (token) {       
-        await getAllusers(token)
+      if (token) {
+        await getAdminUsers(token)
           .then((response) => {
             setUsers(response.data);
           })
@@ -47,14 +49,14 @@ const UserList = () => {
 
   const handleDisableUser = async (id) => {
     if (token) {
-      try {        
+      try {
         await disableUser(token, id);
         handleChange();
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   const handleUnbanUser = async (id) => {
     if (token) {
@@ -90,9 +92,9 @@ const UserList = () => {
   };
 
   return (
-    <div className="list-container container-fluid w-100">
+      <div className='list-container container-fluid w-100'>
         <Table>
-          <thead className="text-center t-head sticky-top">
+          <thead className="text-center t-head">
             <th>Id</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -238,8 +240,8 @@ const UserList = () => {
             ))}
           </tbody>
         </Table>
-    </div>
+      </div>
   );
-};
+}
 
-export default UserList;
+export default AdminUsers

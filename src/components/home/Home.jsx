@@ -7,7 +7,7 @@ const Home = () => {
   console.log(user);
 
   return (
-    <div>
+    <div className='my-4'>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, rerum cupiditate fugiat ad ipsum dolores, dolor a molestias eveniet labore, reprehenderit quis ut nobis ratione fuga praesentium harum. Dicta, saepe!
         Dolorum consectetur odio, eligendi iure earum quidem voluptatibus hic neque asperiores accusantium libero molestias, est quaerat expedita dolorem? Unde tempore nemo fuga similique exercitationem perspiciatis mollitia sed voluptate optio cumque?
         Ut, doloremque distinctio. Dolorem, aperiam saepe quas vero ullam ratione. Commodi tempore ducimus vitae quaerat eos sunt quas voluptas, esse, quam laudantium doloremque accusantium ex, quibusdam minima? Assumenda, laboriosam delectus.

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { endPoints, productEndpoints, endPointAdmin, endPointUsers } from '../utils/endpointsConfig';
-import { useAuth } from '../hooks/useAuth';
 const DBURL = import.meta.env.VITE_URL_BASE;
 
 export const createProduct = async (prodData) => {
@@ -35,6 +34,42 @@ export const uploadIcon = async (iconForm) => {
 export const getAllusers = async (token) => {
   try {
     return await axios.get(`${DBURL}${endPointAdmin.getAllUsers}`, {
+      headers: {
+        "access-token": token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAdminUsers = async (token) => {
+  try {
+    return await axios.get(`${DBURL}${endPointAdmin.getAdminUsers}`, {
+      headers: {
+        "access-token": token
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getBannedUsers = async (token) => {
+  try {
+    return await axios.get(`${DBURL}${endPointAdmin.getBannedUsers}`, {
+      headers: {
+        "access-token": token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getActiveUsers = async (token) => {
+  try {
+    return await axios.get(`${DBURL}${endPointAdmin.getActiveUsers}`, {
       headers: {
         "access-token": token,
       },
