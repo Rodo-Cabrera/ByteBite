@@ -92,7 +92,8 @@ const AdminUsers = () => {
   };
 
   return (
-      <div className='list-container container-fluid w-100'>
+    <div className="list-container container-fluid w-100">
+      <div className="table-container">
         <Table>
           <thead className="text-center t-head">
             <th>Id</th>
@@ -241,6 +242,7 @@ const AdminUsers = () => {
           </tbody>
         </Table>
       </div>
+    </div>
   );
 }
 

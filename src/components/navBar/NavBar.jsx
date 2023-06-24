@@ -38,6 +38,8 @@ const NavBar = () => {
     }
   };
 
+  const { role } = useAuth();
+
   const { isLogged, logout, actualUser } = useAuth()
 
   const [loginMod, setLoginMod] = useState(false);
@@ -82,11 +84,14 @@ const NavBar = () => {
                   Registrarse
                 </Link>
               </Nav.Link>
-              <Nav.Link>
-                <Link className="underline nav-link" to="/userlist">
-                  Lista de usuarios
-                </Link>
-              </Nav.Link>
+              {role === "owner" && role === "owner" && (
+                <Nav.Link>
+                  <Link className="underline nav-link" to="/userlist">
+                    Admin panel
+                  </Link>
+                </Nav.Link>
+              )}
+
               {isLogged ? (
                 <div className="user">
                   <Nav.Link>

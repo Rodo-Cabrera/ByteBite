@@ -91,8 +91,9 @@ const UserList = () => {
 
   return (
     <div className="list-container container-fluid w-100">
+      <div className="table-container">
         <Table>
-          <thead className="text-center t-head sticky-top">
+          <thead className="text-center t-head">
             <th>Id</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -238,6 +239,7 @@ const UserList = () => {
             ))}
           </tbody>
         </Table>
+      </div>
     </div>
   );
 };

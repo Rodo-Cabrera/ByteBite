@@ -30,6 +30,22 @@ export const uploadIcon = async (iconForm) => {
   }
 };
 
+export const getAllProd = async (token) => {
+  try {
+    return await axios.get(`${DBURL}${endPointAdmin.getProd}`, {
+      headers: {
+        "access-token": token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//API USERS -------------------------------
+
+
+
 
 export const getAllusers = async (token) => {
   try {

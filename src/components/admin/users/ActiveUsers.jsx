@@ -8,7 +8,7 @@ import {
   clientUser,
 } from "../../../API/Api";
 
-import { Container, Table, Button } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import { useAuth } from "../../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 
@@ -91,10 +91,10 @@ const ActiveUsers = () => {
   };
 
   return (
-    <Container>
-      <div>
+      <div className="list-container container-fluid w-100">
+       <div className="table-container">
         <Table>
-          <thead className="text-center">
+          <thead className="text-center t-head">
             <th>Id</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -106,7 +106,7 @@ const ActiveUsers = () => {
             <th>Ban/able</th>
             {role === "owner" && <th>Admin</th>}
           </thead>
-          <tbody className="text-center">
+          <tbody className="text-center t-body">
             {users?.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
@@ -240,8 +240,8 @@ const ActiveUsers = () => {
             ))}
           </tbody>
         </Table>
-      </div>
-    </Container>
+        </div>
+        </div>
   );
 };
 

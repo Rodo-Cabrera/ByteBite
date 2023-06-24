@@ -18,24 +18,46 @@
   width: 100%;
 }
 
-.right-container {
-  height: 100vh;
-  overflow-y: auto;
-  padding: 1rem;
-}
-
-.t-head {
-  background-color: #fff;
-}
 
 .t-body {
- margin-top: 30rem;
+  overflow-y: auto;
+  max-height: inherit;
+}
+
+
+.table-container {
+  position: relative;
+  overflow-x: hidden;
+  max-height: 700px;
+}
+.table-container Table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #fff;
+  height: 30px;
+}
+
+.table-container thead::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  border-bottom: 5px solid black;
 }
 
 
 .list-tittle {
   background-color: black;
   color: white;
+  width: 100%;
+  padding-bottom: 1rem;
 }
 
 

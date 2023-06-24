@@ -1,0 +1,12 @@
+.btnWatch {
+  --bs-btn-bg: none;
+  --bs-btn-border-width: 0px
+}
+
+.prod-icon {
+  max-width: 100px;
+}
+
+.t-body td {
+  vertical-align: middle;
+}

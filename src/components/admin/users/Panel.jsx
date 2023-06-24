@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import './styles/userStyle.css'
-import { Accordion, Button, Col, Row } from 'react-bootstrap'
+import { Accordion, Button, Col, Row, Container } from 'react-bootstrap'
 import { useAuth } from '../../../hooks/useAuth'
 import UserList from './UserList'
 import AdminUsers from './AdminUsers'
 import BannedUsers from './BannedUsers'
 import ActiveUsers from './ActiveUsers'
+import AllProd from '../products/AllProd'
+import UsersDatatable from './UsersDatatable'
 
 const Panel = () => {
 
@@ -53,7 +55,9 @@ const Panel = () => {
                     <Accordion.Item eventKey="1" className="my-2">
                       <Accordion.Header>Productos</Accordion.Header>
                       <Accordion.Body className="row">
-                        <Button>Todos los productos</Button>
+                        <Button onClick={() => setPanel(5)}>
+                          Todos los productos
+                        </Button>
                         <Button>Ofertas</Button>
                         <Button>Desabilitados</Button>
                         <Accordion>
@@ -90,12 +94,13 @@ const Panel = () => {
           <div className="d-flex flex-column">
             {panel === 1 ? (
               <div>
-                <div className="list-tittle">
+                <UsersDatatable/>
+                {/* <div className="list-tittle">
                   <h1 className="text-center">Todos los usuarios</h1>
                 </div>
                 <div className="right-container">
                   <UserList />
-                </div>
+                </div> */}
               </div>
             ) : panel === 2 ? (
               <div>
@@ -118,14 +123,24 @@ const Panel = () => {
             ) : panel === 4 ? (
               <div>
                 <div className="list-tittle">
-                  <h1 className="text-center">Usuarios baneados</h1>
+                  <h1 className="text-center">Usuarios activos</h1>
                 </div>
                 <div className="right-container">
-                  <ActiveUsers/>
+                  <ActiveUsers />
                 </div>
               </div>
-            ) : 
-            <></>}
+            ) : panel === 5 ? (
+              <div>
+                 <div className='list-tittle'>
+                       <h1 className='text-center' >Todos los productos</h1>
+                  </div> 
+                  <div>
+                     <AllProd />
+                 </div>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </Col>
       </div>
