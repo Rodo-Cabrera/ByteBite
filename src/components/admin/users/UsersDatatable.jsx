@@ -7,11 +7,13 @@ import {
   adminUser,
   clientUser,
 } from "../../../API/Api";
-import { Table, Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { userContext } from "../../../context/AuthContext";
 import { useAuth } from "../../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 import "./styles/userStyle.css";
+import { Grid } from "@mui/material";
+import 'styled-components'
 
 const UsersDatatable = () => {
   const [users, setUsers] = useState([]);
@@ -19,6 +21,8 @@ const UsersDatatable = () => {
   const { token } = useContext(userContext);
 
   const { role } = useAuth();
+
+
 
   useEffect(() => {
     const resp = async () => {
@@ -47,7 +51,6 @@ const UsersDatatable = () => {
      resp();
    };
 
-  const { _id } = users;
 
   const handleDisableUser = async (id) => {
     if (token) {
@@ -93,6 +96,52 @@ const UsersDatatable = () => {
     }
   };
 
+  const handleRowClick = (rowData, rowMeta) => {
+    const selectedRowData = users[rowMeta.dataIndex];
+    return [selectedRowData, rowData]
+  }
+
+  const options = {
+    fixedHeader: true,
+    tableBodyHeight: "500px", 
+    selectableRows: "none",
+    responsive: "simple",
+    onRowClick: handleRowClick,
+    textLabels: {
+      body: {
+        noMatch: "No se encontraron registros",
+        toolTip: "Ordenar",
+      },
+      pagination: {
+        next: "Siguiente",
+        previous: "Anterior",
+        rowsPerPage: "Filas por página:",
+        displayRows: "de",
+      },
+      toolbar: {
+        search: "Buscar",
+        downloadCsv: "Descargar CSV",
+        print: "Imprimir",
+        viewColumns: "Ver columnas",
+        filterTable: "Filtrar tabla",
+      },
+      filter: {
+        all: "Todos",
+        title: "FILTROS",
+        reset: "RESET",
+      },
+      viewColumns: {
+        title: "Mostrar columnas",
+        titleAria: "Mostrar/Ocultar columnas",
+      },
+      selectedRows: {
+        text: "fila(s) seleccionada(s)",
+        delete: "Eliminar",
+        deleteAria: "Eliminar filas seleccionadas",
+      },
+    },
+  };
+
   const columns = [
     {
       name: "name",
@@ -120,9 +169,7 @@ const UsersDatatable = () => {
       options: {
         customBodyRender: (value, tableMeta) => {
           const isDisabled = users[tableMeta.rowIndex].disabled === true;
-          return (
-            ( isDisabled ? "Desabilitado" : "Habilitado" )
-          )
+          return isDisabled ? "Desabilitado" : "Habilitado";
         },
       },
     },
@@ -130,6 +177,8 @@ const UsersDatatable = () => {
       name: "Editar",
       label: "EDITAR",
       options: {
+        sort: false,
+        filter: false,
         customBodyRender: () => {
           return (
             <Button
@@ -162,6 +211,8 @@ const UsersDatatable = () => {
       name: "Ban/Able",
       label: "BAN/ABLE",
       options: {
+        filter: false,
+        sort: false,
         customBodyRender: (value, tableMeta) => {
           const userId = users[tableMeta.rowIndex]._id;
           const isDisabled = users[tableMeta.rowIndex].disabled === true;
@@ -218,18 +269,83 @@ const UsersDatatable = () => {
       },
     },
     {
-      name: "Admin",
-      label: "ADMIN",
+      name: "Owner",
+      label: "OWNER",
+      options: {
+        filter: false,
+        sort: false,
+        customBodyRender: (value, tableMeta) => {
+          const userId = users[tableMeta.rowIndex]._id;
+          const userRole = users[tableMeta.rowIndex].role;
+
+          if (role === "owner") {
+            return (
+              <>
+                {userRole === "client" ? (
+                  <Button
+                    className="btnAble btn-outline-success"
+                    onClick={() => handleAdminUser(userId)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-star-fill"
+                      viewBox="0 0 16 16"
+                      data-tooltip-id="editUserTt"
+                      data-tooltip-content="Hacer administrador"
+                      data-tooltip-place="bottom"
+                    >
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                  </Button>
+                ) : (
+                  <Button
+                    className="btnAble btn-outline-danger"
+                    onClick={() => handleClientUser(userId)}
+                    data-tooltip-id="editUserTt"
+                    data-tooltip-content="Hacer cliente"
+                    data-tooltip-place="bottom"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-star-fill"
+                      viewBox="0 0 16 16"
+                      data-tooltip-id="editUserTt"
+                      data-tooltip-content="Hacer cliente"
+                      data-tooltip-place="bottom"
+                    >
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                  </Button>
+                )}
+              </>
+            );
+          } else {
+            return null;
+          }
+        },
+      },
     },
   ];
 
+
+
   return (
     <div>
-      <MUIDataTable
-        tittle={"Todos los Usuarios"}
-        data={users}
-        columns={columns}
-      />
+      <Grid className="container my-2 text-center" justifyContent="flex-end">
+        <MUIDataTable
+          title={"Todos los Usuarios"}
+          data={users}
+          columns={columns}
+          options={options}
+          className="custom-table"
+        />
+      </Grid>
     </div>
   );
 };

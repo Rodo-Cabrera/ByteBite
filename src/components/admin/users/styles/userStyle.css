@@ -14,8 +14,13 @@
   color: white;
 }
 
-.list-container {
-  width: 100%;
+
+.custom-table tbody tr td {
+  text-align: center;
+}
+
+.custom-table p{
+  margin-top: 1rem;
 }
 
 

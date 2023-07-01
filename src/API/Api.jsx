@@ -42,6 +42,64 @@ export const getAllProd = async (token) => {
   }
 };
 
+export const spotlightProduct = async (token, id) => {
+  try {
+    return await axios.patch(`${DBURL}${endPointAdmin.spotlightProd}/${id}`, {}, {
+      headers: {
+        "access-token": token
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unSpotlightProduct = async (token, id) => {
+  try {
+    return await axios.patch(
+      `${DBURL}${endPointAdmin.unSpotlightProd}/${id}`,
+      {},
+      {
+        headers: {
+          "access-token": token,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const ableProduct = async (token, id) => {
+  try {
+    return await axios.patch(`${DBURL}${endPointAdmin.ableProd}/${id}`, {},
+      {
+        headers: {
+          "access-token": token
+        }
+      })
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const disableProduct = async (token, id) => {
+  try {
+    return await axios.patch(
+      `${DBURL}${endPointAdmin.disableProd}/${id}`,
+      {},
+      {
+        headers: {
+          "access-token": token,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 //API USERS -------------------------------
 
 

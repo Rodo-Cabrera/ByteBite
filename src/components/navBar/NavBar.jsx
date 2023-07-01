@@ -84,13 +84,14 @@ const NavBar = () => {
                   Registrarse
                 </Link>
               </Nav.Link>
-              {role === "owner" && role === "owner" && (
+              
+              {role !== "client" && (
                 <Nav.Link>
                   <Link className="underline nav-link" to="/userlist">
                     Admin panel
                   </Link>
                 </Nav.Link>
-              )}
+              )}            
 
               {isLogged ? (
                 <div className="user">

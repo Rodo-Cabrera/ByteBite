@@ -10,3 +10,101 @@
 .t-body td {
   vertical-align: middle;
 }
+
+.custom-table tbody tr td  {
+  text-align: center;
+}
+
+.custom-table thead tr th div {
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+
+}
+
+.custom-table thead tr th span {
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.custom-table p{
+  margin-top: 1rem;
+}
+
+.prod-card-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px black solid;
+  position: inherit;
+  background-color:  white;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 50px;
+  margin-bottom: -50px;
+  z-index: 1;
+}
+
+.modal-dialog {
+  padding-top: 2rem;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.prod-modal {
+  margin-top: 3rem;
+  max-height: fit-content;
+}
+
+.admin-prod-card {
+  display: flex;
+  flex-direction: column;
+}
+.carousel-container {
+  background-color: rgb(0, 0, 0, 0.2);
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+
+.carousel-item .carousel-image-container {
+  flex-direction: column;
+  max-height: 100vh;
+  display: flex;
+  margin-bottom: 60px;
+}
+
+
+
+.carousel-image-container {
+  position: relative;
+}
+
+
+.prod-title h3 {
+  color: rgb(255, 255, 255);
+  font-size: x-large;
+   text-shadow: -2px -2px 0 rgb(0, 0, 0), 2px -2px 0 rgb(0, 0, 0), -2px 2px 0 rgb(0, 0, 0), 2px 2px 0 rgb(0, 0, 0);
+    --webkit-text-stroke: 4px rgb(0, 0, 0);
+  bottom: 0;
+}
+
+.common-price {
+  text-decoration: line-through;
+  color: red;
+}
+
+.offer-price {
+  color: green;
+}
+
