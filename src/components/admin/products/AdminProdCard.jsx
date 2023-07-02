@@ -1,8 +1,12 @@
 import { Switch, Box, FormControlLabel, Snackbar, Alert } from '@mui/material';
 import React, { useState, useContext } from 'react'
 import { userContext } from '../../../context/AuthContext';
-import { Card, Button, Container, Carousel } from 'react-bootstrap'
-import { ableProduct, disableProduct, spotlightProduct, unSpotlightProduct } from '../../../API/Api';
+import { Card, Button, Container, Carousel, Form } from 'react-bootstrap'
+import { ableProduct, disableProduct, editPrice, offerPriceProd, spotlightProduct, unSpotlightProduct } from '../../../API/Api';
+import { useForm } from 'react-hook-form';
+import { validationsFields } from '../../../utils/validation';
+import { messages } from '../../../utils/messages';
+import Swal from 'sweetalert2';
 
 
 const AdminProdCard = ({ product, updateProductState}) => {
@@ -19,7 +23,62 @@ const AdminProdCard = ({ product, updateProductState}) => {
 
   const [notificationMessage, setNotificationMessage] = useState('');
 
-  const [ableMessage, setAbleMessage] = useState('')
+  const [ableMessage, setAbleMessage] = useState('');
+
+  const [price, setPrice] = useState(0);
+
+  const {
+    register,
+    formState: { errors },
+    setValue,
+    handleSubmit,
+  } = useForm();
+
+  const [priceInOffer, setPriceInOffer] = useState({
+    price: Number,
+    offerPrice: Number
+  })
+
+  const handleChange = (e) => {
+    setPriceInOffer((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  };
+
+  const handleChangePrice = async (data) => {
+
+    const { price, offerPrice } = data;
+
+    if (token) {
+      try {
+        if (parseInt(offerPrice) >= parseInt(price)) {
+          return (
+            Swal.fire({
+              icon: "error",
+              title: "Error en la oferta",
+              text: "El precio en oferta no puede ser mayor al de lista",          
+            })
+          )
+        } else if (parseInt(price) === parseInt(price) && parseInt(offerPrice !== null)) {
+          await offerPriceProd(token, product._id);
+          setPriceInOffer({ offerPrice: offerPrice });
+          updateProductState(product._id, { offerPrice: offerPrice });
+        } else {
+          await offerPriceProd(token, product._id);
+          setPriceInOffer({ offerPrice: offerPrice})
+          updateProductState(product._id, { offerPrice: offerPrice });
+
+          await editPrice(token, product._id);
+          setPriceInOffer({price: price})
+          updateProductState(product._id, { price: price });
+
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 
 
 
@@ -115,21 +174,118 @@ const AdminProdCard = ({ product, updateProductState}) => {
               {product.tittle}
             </Card.Title>
             <Card.Text className="text-center">{product.description}</Card.Text>
-            <div className="d-flex justify-content-around">
-              <div>
-                {product.offerPrice ? (
-                  <div className='row'>
-                    <p className='common-price'>Precio anterior: ${ product.price }</p>
-                    <p className='offer-price'>Precio en oferta: ${product.offerPrice}</p>
-                  </div>
-                ) : (
-                  <>
-                    <p className='offer-price'>Precio: ${product.price}</p>
-                  </>
-                )}
+            {price === 0 ? (
+              <div className="d-flex justify-content-around">
+                <div>
+                  {product.offerPrice ? (
+                    <div className="row">
+                      <p className="common-price">
+                        Precio anterior: ${product.price}
+                      </p>
+                      <p className="offer-price">
+                        Precio en oferta: ${product.offerPrice}
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="offer-price">Precio: ${product.price}</p>
+                    </>
+                  )}
+                </div>
+                <p>Stock: {product.quantity}</p>
               </div>
-              <p>Stock: {product.quantity}</p>
-            </div>
+            ) : (
+              price === 1 && (
+                <Box className="d-flex">
+                  <Form className="row" onSubmit={handleSubmit(handleChangePrice)}>
+                    <div className="d-flex row">
+                      <div className='col-6'>
+                        <Form.Label htmlFor="lastPrice">
+                          Precio Anterior
+                        </Form.Label>
+                        <Form.Control
+                          id="lastPrice"
+                          size="sm"
+                          type="text"
+                          name="price"
+                          placeholder={product.price}
+                          defaultValue={product.price}
+                          className="mb-1"
+                          {...register("price", {
+                            required: false,
+                            maxLength: 6,
+                            minLength: 1,
+                            pattern: validationsFields.price,
+                          })}
+                            onChange={handleChange}
+                        />
+                        {errors.price?.type === "maxLength" && (
+                          <p className="edit-alert">
+                            {messages.prodPriceMaxLengthError}
+                          </p>
+                        )}
+                        {errors.price?.type === "minLength" && (
+                          <p className="edit-alert">
+                            {messages.prodPriceMinLengthError}
+                          </p>
+                        )}
+                        {errors.price?.type === "pattern" && (
+                          <p className="edit-alert">
+                            {messages.prodPriceMatchError}
+                          </p>
+                        )}
+                      </div>
+                      <div className='col-6'>
+                        <Form.Label htmlFor="offerPrice">
+                          Precio de oferta
+                        </Form.Label>
+                          <Form.Control
+                          id='offerPrice'
+                          size="sm"
+                          type="text"
+                          name="offerPrice"
+                          defaultValue={product.offerPrice}
+                          placeholder={product.offerPrice}
+                          {...register("offerPrice", {
+                            required: true,
+                            maxLength: 6,
+                            minLength: 1,
+                            pattern: validationsFields.price,
+                          })}
+                            onChange={handleChange}
+                        />
+                        {errors.offerPrice?.type === "required" && (
+                          <p className="edit-alert">
+                            {messages.prodOfferPriceError}
+                          </p>
+                        )}
+                        {errors.offerPrice?.type === "maxLength" && (
+                          <p className="edit-alert">
+                            {messages.prodPriceMaxLengthError}
+                          </p>
+                        )}
+                        {errors.offerPrice?.type === "minLength" && (
+                          <p className="edit-alert">
+                            {messages.prodPriceMinLengthError}
+                          </p>
+                        )}
+                        {errors.offerPrice?.type === "pattern" && (
+                          <p className="edit-alert">
+                            {messages.prodPriceMatchError}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="text-center my-1">
+                      <Button type="submit" variant="success">
+                        Poner en oferta
+                      </Button>
+                    </div>
+                  </Form>
+                </Box>
+              )
+            )}
+
             <div>
               <Box className="justify-content-around d-flex">
                 <FormControlLabel
@@ -174,7 +330,25 @@ const AdminProdCard = ({ product, updateProductState}) => {
                 </Snackbar>
               </Box>
             </div>
-
+            <div>
+              {price === 0 ? (
+                <Button
+                  className="container mb-2"
+                  variant="success"
+                  onClick={() => setPrice(1)}
+                >
+                  Poner en oferta
+                </Button>
+              ) : (
+                <Button
+                  className="container mb-2"
+                  variant="danger"
+                  onClick={() => setPrice(0)}
+                >
+                  Cancelar
+                </Button>
+              )}
+            </div>
             <Button className="container" variant="warning">
               Editar producto
             </Button>

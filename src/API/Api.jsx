@@ -99,6 +99,30 @@ export const disableProduct = async (token, id) => {
   }
 };
 
+export const offerPriceProd = async (token, id) => {
+  try {
+    return await axios.patch(`${DBURL}${endPointAdmin.prodOfferPrice}/${id}`, {}, {
+      headers: {
+        "access-token": token
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const editPrice = async (token, id) => {
+  try {
+    return await axios.patch(`${DBURL}${endPointAdmin.editPrice}/${id}`, {}, {
+      headers: {
+        "access-token": token
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 //API USERS -------------------------------
 

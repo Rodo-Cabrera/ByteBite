@@ -81,6 +81,6 @@ export const messages = {
   prodStockMinLengthError: "El stock debe tener como mínimo un (1) número",
   prodStockMaxLengthError: "El stock del producto no puede superar los 4 caracteres",
   prodStockMatchError: "Debes escribir la cantidad de productos en números",
-  
+  prodOfferPriceError: "Debes poner un precio de oferta",
 };
 

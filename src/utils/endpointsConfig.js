@@ -40,6 +40,8 @@ export const endPointAdmin = {
   unOfferProd: "/prod/unoffer-product",
   disableProd: "/prod/disable-product",
   ableProd: "/prod/able-product",
-  deleteProd: "/prod/ddelete-product"
+  deleteProd: "/prod/delete-product",
+  prodOfferPrice: "/prod/set-offer-price",
+  editPrice: "/prod/edit-price",
 
 };

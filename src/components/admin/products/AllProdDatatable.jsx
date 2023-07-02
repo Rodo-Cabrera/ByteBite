@@ -115,6 +115,24 @@ const AllProdDatatable = () => {
     {
       name: "price",
       label: "PRECIO",
+      options: {
+        customBodyRender: (value, tableMeta) => {
+          const price = prod[tableMeta.rowIndex].price;
+          const offerPrice = prod[tableMeta.rowIndex].offerPrice;
+          return (
+            <>
+            {
+                offerPrice ? 
+                  <div>
+                    <p className="common-price">$ { price }</p>
+                    <p className="offer-price">$ { offerPrice }</p>
+                  </div> :
+                  <p className="offer-price">$ { price }</p> 
+            }
+            </>
+          )
+        }
+      }
     },
     {
       name: "category",

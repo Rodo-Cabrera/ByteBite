@@ -62,7 +62,6 @@
 
 
 .prod-modal {
-  margin-top: 3rem;
   max-height: fit-content;
 }
 
@@ -108,3 +107,11 @@
   color: green;
 }
 
+
+.edit-alert::before { 
+  display: inline;
+  content: "❌ ";  
+}
+.edit-alert{
+  color: red;
+}
