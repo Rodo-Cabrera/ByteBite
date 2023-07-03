@@ -35,8 +35,8 @@ const AdminProdCard = ({ product, updateProductState}) => {
   } = useForm();
 
   const [priceInOffer, setPriceInOffer] = useState({
-    price: Number,
-    offerPrice: Number
+    price: product.price,
+    offerPrice: product.offerPrice || 0,
   })
 
   const handleChange = (e) => {
@@ -48,11 +48,14 @@ const AdminProdCard = ({ product, updateProductState}) => {
 
   const handleChangePrice = async (data) => {
 
-    const { price, offerPrice } = data;
+   const formData = {
+    price: data.price || priceInOffer.price,
+    offerPrice: data.offerPrice || priceInOffer.offerPrice,
+   }
 
     if (token) {
       try {
-        if (parseInt(offerPrice) >= parseInt(price)) {
+        if (parseInt(formData.offerPrice) >= parseInt(formData.price)) {
           return (
             Swal.fire({
               icon: "error",
@@ -60,18 +63,18 @@ const AdminProdCard = ({ product, updateProductState}) => {
               text: "El precio en oferta no puede ser mayor al de lista",          
             })
           )
-        } else if (parseInt(price) === parseInt(price) && parseInt(offerPrice !== null)) {
+        } else if (parseInt(formData.price) === parseInt(formData.price) && parseInt(offerPrice !== null)) {
           await offerPriceProd(token, product._id);
-          setPriceInOffer({ offerPrice: offerPrice });
-          updateProductState(product._id, { offerPrice: offerPrice });
+          setPriceInOffer({ offerPrice: formData.offerPrice });
+          updateProductState(product._id, { offerPrice: formData.offerPrice });
         } else {
           await offerPriceProd(token, product._id);
-          setPriceInOffer({ offerPrice: offerPrice})
-          updateProductState(product._id, { offerPrice: offerPrice });
+          setPriceInOffer({ offerPrice: formData.offerPrice})
+          updateProductState(product._id, { offerPrice: formData.offerPrice });
 
           await editPrice(token, product._id);
-          setPriceInOffer({price: price})
-          updateProductState(product._id, { price: price });
+          setPriceInOffer({price: formData.price})
+          updateProductState(product._id, { price: formData.price });
 
         }
       } catch (error) {
@@ -105,7 +108,7 @@ const AdminProdCard = ({ product, updateProductState}) => {
   const handleProdStatus = async () => {
     if (token) {
       try {
-        if (!prodStatus) {
+        if (prodStatus) {
           await ableProduct(token, product._id);          
         } else {
           await disableProduct(token, product._id);   
@@ -209,7 +212,7 @@ const AdminProdCard = ({ product, updateProductState}) => {
                           type="text"
                           name="price"
                           placeholder={product.price}
-                          defaultValue={product.price}
+                          value={priceInOffer.price}
                           className="mb-1"
                           {...register("price", {
                             required: false,
@@ -217,7 +220,11 @@ const AdminProdCard = ({ product, updateProductState}) => {
                             minLength: 1,
                             pattern: validationsFields.price,
                           })}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                              handleChange(e);
+                              setValue('price', e.target.value)  
+                            }
+                            }
                         />
                         {errors.price?.type === "maxLength" && (
                           <p className="edit-alert">
@@ -244,7 +251,7 @@ const AdminProdCard = ({ product, updateProductState}) => {
                           size="sm"
                           type="text"
                           name="offerPrice"
-                          defaultValue={product.offerPrice}
+                          value={priceInOffer.offerPrice}
                           placeholder={product.offerPrice}
                           {...register("offerPrice", {
                             required: true,
@@ -252,7 +259,8 @@ const AdminProdCard = ({ product, updateProductState}) => {
                             minLength: 1,
                             pattern: validationsFields.price,
                           })}
-                            onChange={handleChange}
+                            onChange={(e) => {handleChange(e);
+                            setValue('offerPrice', e.target.value)}}
                         />
                         {errors.offerPrice?.type === "required" && (
                           <p className="edit-alert">
