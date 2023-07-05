@@ -4,6 +4,7 @@ import App from './app'
 import { BrowserRouter } from "react-router-dom";
 import { FiltersProvider } from './context/FiltersContext';
 import { CartProvider } from './context/CartContext';
+import { SnackbarProvider } from 'notistack';
 
 
 
@@ -12,7 +13,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
       <FiltersProvider>
         <CartProvider>
-          <App />
+          <SnackbarProvider maxSnack={3} autoHideDuration={2000} >
+           <App />
+          </SnackbarProvider>
         </CartProvider>
       </FiltersProvider>
     </BrowserRouter>

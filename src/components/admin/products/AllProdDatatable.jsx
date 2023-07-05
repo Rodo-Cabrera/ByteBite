@@ -19,16 +19,19 @@ const AllProdDatatable = () => {
 
   const { role } = useAuth();
 
+   const resp = async () => {
+     if (token) {
+       try {
+        await getAllProd(token).then((response) => {
+          setProd(response.data);
+        });
+       } catch (error) {
+        console.log(error);
+       }     
+     }
+   };
+
   useEffect(() => {
-    const resp = async () => {
-      if (token) {
-        await getAllProd(token)
-          .then((response) => {
-            setProd(response.data);
-          })
-          .catch((error) => console.log(error));
-      }
-    };
     resp();
   }, []);
 

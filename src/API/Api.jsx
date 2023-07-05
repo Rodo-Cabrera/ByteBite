@@ -99,23 +99,11 @@ export const disableProduct = async (token, id) => {
   }
 };
 
-export const offerPriceProd = async (token, id) => {
+export const editProd = async (token, id, prodData) => {
   try {
-    return await axios.patch(`${DBURL}${endPointAdmin.prodOfferPrice}/${id}`, {}, {
+    return await axios.patch(`${DBURL}${endPointAdmin.editProd}/${id}`, prodData, {
       headers: {
-        "access-token": token
-      }
-    })
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const editPrice = async (token, id) => {
-  try {
-    return await axios.patch(`${DBURL}${endPointAdmin.editPrice}/${id}`, {}, {
-      headers: {
-        "access-token": token
+        'access-token': token
       }
     })
   } catch (error) {
@@ -123,6 +111,33 @@ export const editPrice = async (token, id) => {
   }
 }
 
+export const offerProd = async (token, id) => {
+  try {
+    return await axios.patch(`${DBURL}${endPointAdmin.offerProd}/${id}`, {}, {
+      headers: {
+        'access-token': token
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const unOfferProd = async (token, id) => {
+  try {
+    return await axios.patch(
+      `${DBURL}${endPointAdmin.unOfferProd}/${id}`,
+      {},
+      {
+        headers: {
+          "access-token": token,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 //API USERS -------------------------------
 

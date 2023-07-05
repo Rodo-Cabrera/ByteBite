@@ -2,11 +2,12 @@ import { Switch, Box, FormControlLabel, Snackbar, Alert } from '@mui/material';
 import React, { useState, useContext } from 'react'
 import { userContext } from '../../../context/AuthContext';
 import { Card, Button, Container, Carousel, Form } from 'react-bootstrap'
-import { ableProduct, disableProduct, editPrice, offerPriceProd, spotlightProduct, unSpotlightProduct } from '../../../API/Api';
+import { ableProduct, disableProduct, editProd, offerProd, spotlightProduct, unSpotlightProduct } from '../../../API/Api';
 import { useForm } from 'react-hook-form';
 import { validationsFields } from '../../../utils/validation';
 import { messages } from '../../../utils/messages';
 import Swal from 'sweetalert2';
+import { useSnackbar } from 'notistack';
 
 
 const AdminProdCard = ({ product, updateProductState}) => {
@@ -17,20 +18,14 @@ const AdminProdCard = ({ product, updateProductState}) => {
 
   const [prodStatus, setProdStatus] = useState(product.disabled);
 
-  const [openNotification, setOpenNotification] = useState(false);
-
-  const [openStatusNotification, setOpenStatusNotification] = useState(false);
-
-  const [notificationMessage, setNotificationMessage] = useState('');
-
-  const [ableMessage, setAbleMessage] = useState('');
-
   const [price, setPrice] = useState(0);
+
+  const { enqueueSnackbar } = useSnackbar();
+
 
   const {
     register,
     formState: { errors },
-    setValue,
     handleSubmit,
   } = useForm();
 
@@ -38,50 +33,75 @@ const AdminProdCard = ({ product, updateProductState}) => {
     price: product.price,
     offerPrice: product.offerPrice || 0,
   })
+  
+
 
   const handleChange = (e) => {
     setPriceInOffer((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
-    }))
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const handleChangePrice = async (data) => {
-
-   const formData = {
-    price: data.price || priceInOffer.price,
-    offerPrice: data.offerPrice || priceInOffer.offerPrice,
-   }
-
+  const handleChangePrice = async (prodData) => {
+    console.log(priceInOffer);
     if (token) {
       try {
-        if (parseInt(formData.offerPrice) >= parseInt(formData.price)) {
+        if (parseInt(priceInOffer.offerPrice) >= parseInt(priceInOffer.price)) {
           return (
             Swal.fire({
               icon: "error",
               title: "Error en la oferta",
-              text: "El precio en oferta no puede ser mayor al de lista",          
+              text: "El precio de lista no puede ser menor que el de oferta",          
             })
           )
-        } else if (parseInt(formData.price) === parseInt(formData.price) && parseInt(offerPrice !== null)) {
-          await offerPriceProd(token, product._id);
-          setPriceInOffer({ offerPrice: formData.offerPrice });
-          updateProductState(product._id, { offerPrice: formData.offerPrice });
         } else {
-          await offerPriceProd(token, product._id);
-          setPriceInOffer({ offerPrice: formData.offerPrice})
-          updateProductState(product._id, { offerPrice: formData.offerPrice });
-
-          await editPrice(token, product._id);
-          setPriceInOffer({price: formData.price})
-          updateProductState(product._id, { price: formData.price });
-
+          await editProd(token, product._id, priceInOffer);
+          setPriceInOffer({ price: priceInOffer.price });
+          updateProductState(product._id, prodData);
         }
+      } catch (error) {
+        console.log(error);
+      }
+    }  
+  }
+
+  const handleChangeOfferPrice = async (prodData) => {
+    if (token) {
+      try {
+        if (parseInt(priceInOffer.offerPrice) >= parseInt(priceInOffer.price)) {
+          return (
+            Swal.fire({
+              icon: "error",
+              title: "Error en la oferta",
+              text: "El precio en oferta no puede ser mayor al de lista",
+            })
+          )
+        } else if (priceInOffer.offerPrice !== 0) {
+          await editProd(token, product._id, priceInOffer);
+          await offerProd(token, product._id);
+          setPriceInOffer({ offerPrice: priceInOffer.offerPrice });
+          updateProductState(product._id, prodData);
+        }
+      } catch (error) {
+        console.log(error);
+        }
+      } 
+  }
+
+  const unOfferProd = async (prodData) => {
+    if (token) {
+      try {
+        await unOfferProd(token, product._id);
+        setPriceInOffer({offerPrice: 0})
+        await editProd(token, product._id, priceInOffer);
+        updateProductState(product._id, {offer: !offer})
       } catch (error) {
         console.log(error);
       }
     }
   }
+  
 
 
 
@@ -96,8 +116,9 @@ const AdminProdCard = ({ product, updateProductState}) => {
         setSpotlight(!spotlight);
         updateProductState(product._id, { spotlight: !spotlight });
         const message = spotlight ? 'Producto DESMARCADO como destacado' : 'Producto MARCADO como destacado';
-        setNotificationMessage(message);
-        setOpenNotification(true);
+        enqueueSnackbar(`${message}`, {
+          variant: `${spotlight ? "warning" : "success"}`,         
+        });
       } catch (error) {
         console.log(error);
       }
@@ -116,8 +137,8 @@ const AdminProdCard = ({ product, updateProductState}) => {
         setProdStatus(!prodStatus);
         updateProductState(product._id, { disabled: !prodStatus });
         const message = !prodStatus ? 'Producto DESABILITADO con éxito' : 'Producto HABILITADO con éxito';
-        setAbleMessage(message);
-        setOpenStatusNotification(true);
+        enqueueSnackbar(`${message}`, {
+          variant: `${!prodStatus ? 'warning' : 'success'}`})
       } catch (error) {
         console.log(error);
       }
@@ -199,10 +220,13 @@ const AdminProdCard = ({ product, updateProductState}) => {
               </div>
             ) : (
               price === 1 && (
-                <Box className="d-flex">
-                  <Form className="row" onSubmit={handleSubmit(handleChangePrice)}>
-                    <div className="d-flex row">
-                      <div className='col-6'>
+                <Box className="d-flex justify-content-around">
+                  <Form
+                    className="row"
+                    onSubmit={handleSubmit(handleChangePrice)}
+                  >
+                    <div className="col-12">
+                      <div>
                         <Form.Label htmlFor="lastPrice">
                           Precio Anterior
                         </Form.Label>
@@ -220,11 +244,7 @@ const AdminProdCard = ({ product, updateProductState}) => {
                             minLength: 1,
                             pattern: validationsFields.price,
                           })}
-                            onChange={(e) => {
-                              handleChange(e);
-                              setValue('price', e.target.value)  
-                            }
-                            }
+                          onChange={handleChange}
                         />
                         {errors.price?.type === "maxLength" && (
                           <p className="edit-alert">
@@ -242,12 +262,21 @@ const AdminProdCard = ({ product, updateProductState}) => {
                           </p>
                         )}
                       </div>
-                      <div className='col-6'>
+                      <div className="text-center my-1">
+                        <Button type="submit" variant="warning">
+                          Modificar precio
+                        </Button>
+                      </div>
+                    </div>
+                  </Form>
+                  <Form onSubmit={handleSubmit(handleChangeOfferPrice)}>
+                    <div className="col-12 container">
+                      <div className="col-12">
                         <Form.Label htmlFor="offerPrice">
                           Precio de oferta
                         </Form.Label>
-                          <Form.Control
-                          id='offerPrice'
+                        <Form.Control
+                          id="offerPrice"
                           size="sm"
                           type="text"
                           name="offerPrice"
@@ -259,35 +288,36 @@ const AdminProdCard = ({ product, updateProductState}) => {
                             minLength: 1,
                             pattern: validationsFields.price,
                           })}
-                            onChange={(e) => {handleChange(e);
-                            setValue('offerPrice', e.target.value)}}
+                          onChange={handleChange}
                         />
-                        {errors.offerPrice?.type === "required" && (
-                          <p className="edit-alert">
-                            {messages.prodOfferPriceError}
-                          </p>
-                        )}
-                        {errors.offerPrice?.type === "maxLength" && (
-                          <p className="edit-alert">
-                            {messages.prodPriceMaxLengthError}
-                          </p>
-                        )}
-                        {errors.offerPrice?.type === "minLength" && (
-                          <p className="edit-alert">
-                            {messages.prodPriceMinLengthError}
-                          </p>
-                        )}
-                        {errors.offerPrice?.type === "pattern" && (
-                          <p className="edit-alert">
-                            {messages.prodPriceMatchError}
-                          </p>
-                        )}
+                        <div className="d-flex small text-center">
+                          {errors.offerPrice?.type === "required" && (
+                            <p className="edit-alert">
+                              {messages.prodOfferPriceError}
+                            </p>
+                          )}
+                          {errors.offerPrice?.type === "maxLength" && (
+                            <p className="edit-alert">
+                              {messages.prodPriceMaxLengthError}
+                            </p>
+                          )}
+                          {errors.offerPrice?.type === "minLength" && (
+                            <p className="edit-alert">
+                              {messages.prodPriceMinLengthError}
+                            </p>
+                          )}
+                            {errors.offerPrice?.type === "pattern" && (
+                              <p className="edit-alert">
+                              {messages.prodPriceMatchError}
+                              </p>)
+                          } 
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-center my-1">
-                      <Button type="submit" variant="success">
-                        Poner en oferta
-                      </Button>
+                      <div className="text-center my-1">
+                        <Button type="submit" variant="success">
+                          Poner en oferta
+                        </Button>
+                      </div>
                     </div>
                   </Form>
                 </Box>
@@ -303,19 +333,10 @@ const AdminProdCard = ({ product, updateProductState}) => {
                       color="warning"
                       checked={spotlight}
                       onClick={handleSpotlightProd}
-                      onChange={handleSpotlightProd}
+                      onChange={setSpotlight}
                     />
                   }
                 />
-                <Snackbar
-                  open={openNotification}
-                  autoHideDuration={2000}
-                  onClose={() => setOpenNotification(false)}
-                >
-                  <Alert severity={spotlight ? "success" : "warning"}>
-                    {notificationMessage}
-                  </Alert>
-                </Snackbar>
                 <FormControlLabel
                   label={!prodStatus ? "Habilitado" : "Desabilitado"}
                   control={
@@ -327,15 +348,6 @@ const AdminProdCard = ({ product, updateProductState}) => {
                     />
                   }
                 />
-                <Snackbar
-                  open={openStatusNotification}
-                  autoHideDuration={2000}
-                  onClose={() => setOpenStatusNotification(false)}
-                >
-                  <Alert severity={!prodStatus ? "success" : "warning"}>
-                    {ableMessage}
-                  </Alert>
-                </Snackbar>
               </Box>
             </div>
             <div>
@@ -345,16 +357,27 @@ const AdminProdCard = ({ product, updateProductState}) => {
                   variant="success"
                   onClick={() => setPrice(1)}
                 >
-                  Poner en oferta
+                  Modificar precio
                 </Button>
               ) : (
-                <Button
-                  className="container mb-2"
-                  variant="danger"
-                  onClick={() => setPrice(0)}
-                >
-                  Cancelar
-                </Button>
+                <>
+                  {product.offer ? (
+                    <div className="d-flex justify-content-around mb-2">
+                      <Button variant="danger" onClick={() => setPrice(0)}>
+                        Cancelar
+                      </Button>
+                      <Button variant="danger">Quitar oferta</Button>
+                    </div>
+                  ) : (
+                    <Button
+                      variant="danger"
+                      onClick={() => setPrice(0)}
+                      className="container mb-2"
+                    >
+                      Cancelar
+                    </Button>
+                  )}
+                </>
               )}
             </div>
             <Button className="container" variant="warning">
