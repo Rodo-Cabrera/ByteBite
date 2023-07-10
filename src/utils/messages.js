@@ -82,5 +82,11 @@ export const messages = {
   prodStockMaxLengthError: "El stock del producto no puede superar los 4 caracteres",
   prodStockMatchError: "Debes escribir la cantidad de productos en números",
   prodOfferPriceError: "Debes poner un precio de oferta",
+  
+  
+  //Mensajes para edición de producto
+  
 };
+
+
 

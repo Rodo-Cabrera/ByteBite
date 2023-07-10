@@ -115,3 +115,7 @@
 .edit-alert{
   color: red;
 }
+
+.edit-icon {
+  align-self: center;
+}

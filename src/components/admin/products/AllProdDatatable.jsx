@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 import {
   getAllProd
 } from "../../../API/Api";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Col } from "react-bootstrap";
 import { userContext } from "../../../context/AuthContext";
 import { useAuth } from "../../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
@@ -95,6 +95,7 @@ const AllProdDatatable = () => {
   };
 
   const columns = [
+  
     {
       name: "icon",
       label: "ICONO",
@@ -201,19 +202,27 @@ const AllProdDatatable = () => {
   return (
     <>
       <div>
-        <Grid className="container my-2 text-center" justifyContent="flex-end">
-          <MUIDataTable
-            title={"Productos"}
-            data={prod}
-            columns={columns}
-            options={options}
-            className="custom-table"
-          />
-        </Grid>
+        <Col xl={12} xs={6} className="row">
+          <Grid
+            className="container my-2 text-center"
+            justifyContent="flex-end"
+          >
+            <MUIDataTable
+              title={"Productos"}
+              data={prod}
+              columns={columns}
+              options={options}
+              className="custom-table"
+            />
+          </Grid>
+        </Col>
       </div>
       <Modal show={prodMod} onHide={handleCloseProd} className="prod-modal">
         {selectedProd && (
-          <AdminProdCard product={selectedProd} updateProductState={updateProdState} />
+          <AdminProdCard
+            product={selectedProd}
+            updateProductState={updateProdState}
+          />
         )}
       </Modal>
     </>
