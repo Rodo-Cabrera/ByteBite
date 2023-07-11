@@ -95,13 +95,12 @@ const AllProdDatatable = () => {
   };
 
   const columns = [
-  
     {
       name: "icon",
       label: "ICONO",
       options: {
-        sort: false,
         filter: false,
+        sort: false,
         customBodyRender: (value, tableMeta) => {
           const icon = prod[tableMeta.rowIndex].icon;
           return (
@@ -115,6 +114,9 @@ const AllProdDatatable = () => {
     {
       name: "tittle",
       label: "TÍTULO",
+      options: {
+        sort: false,
+      },
     },
     {
       name: "price",
@@ -124,32 +126,41 @@ const AllProdDatatable = () => {
           const price = prod[tableMeta.rowIndex].price;
           const offerPrice = prod[tableMeta.rowIndex].offerPrice;
           return (
-            <>
-            {
-                offerPrice ? 
-                  <div>
-                    <p className="common-price">$ { price }</p>
-                    <p className="offer-price">$ { offerPrice }</p>
-                  </div> :
-                  <p className="offer-price">$ { price }</p> 
-            }
-            </>
-          )
-        }
-      }
+            <div>
+              {offerPrice ? (
+                <div>
+                  <p className="common-price">$ {price}</p>
+                  <p className="offer-price">$ {offerPrice}</p>
+                </div>
+              ) : (
+                <div>
+                  <p className="offer-price">$ {price}</p>
+                </div>
+              )}
+            </div>
+          );
+        },
+      },
     },
     {
       name: "category",
       label: "CATEGORÍA",
+      options: {
+        sort: false,
+      },
     },
     {
       name: "quantity",
       label: "CANTIDAD",
+      options: {
+        sort: false,
+      },
     },
     {
       name: "status",
       label: "STATUS",
       options: {
+        sort: false,
         customBodyRender: (value, tableMeta) => {
           const isDisabled = prod[tableMeta.rowIndex].disabled;
           return isDisabled ? "Desabilitado" : "Habilitado";
@@ -160,11 +171,12 @@ const AllProdDatatable = () => {
       name: "spotlight",
       label: "VISUALIZACIÓN",
       options: {
+        sort: false,
         customBodyRender: (value, tableMeta) => {
           const isSpotlight = prod[tableMeta.rowIndex].spotlight;
-          return isSpotlight ? "Destacado" : "Común"
-        }
-      }
+          return isSpotlight ? "Destacado" : "Común";
+        },
+      },
     },
     {
       name: "ver",
@@ -173,10 +185,11 @@ const AllProdDatatable = () => {
         filter: false,
         sort: false,
         customBodyRender: (value, tableMeta) => {
-
-
           return (
-            <Button className="btnWatch btn-outline-success" onClick={()=> handleOpenProd(prod[tableMeta.rowIndex])}>
+            <Button
+              className="btnWatch btn-outline-success"
+              onClick={() => handleOpenProd(prod[tableMeta.rowIndex])}
+            >
               <Tooltip id="viewProdTt" type="info" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"

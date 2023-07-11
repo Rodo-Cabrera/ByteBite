@@ -103,7 +103,7 @@ const UsersDatatable = () => {
 
   const options = {
     fixedHeader: true,
-    tableBodyHeight: "500px", 
+    tableBodyHeight: "500px",
     selectableRows: "none",
     responsive: "simple",
     onRowClick: handleRowClick,
@@ -177,9 +177,8 @@ const UsersDatatable = () => {
       name: "Editar",
       label: "EDITAR",
       options: {
-        sort: false,
         filter: false,
-        customBodyRender: () => {
+        customBodyRenderLite: (dataIndex) => {
           return (
             <Button
               className="btnEdit btn-outline-primary"
@@ -208,11 +207,9 @@ const UsersDatatable = () => {
       },
     },
     {
-      name: "Ban/Able",
+      name: "status",
       label: "BAN/ABLE",
       options: {
-        filter: false,
-        sort: false,
         customBodyRender: (value, tableMeta) => {
           const userId = users[tableMeta.rowIndex]._id;
           const isDisabled = users[tableMeta.rowIndex].disabled === true;
@@ -269,11 +266,10 @@ const UsersDatatable = () => {
       },
     },
     {
-      name: "Owner",
+      name: "role",
       label: "OWNER",
       options: {
         filter: false,
-        sort: false,
         customBodyRender: (value, tableMeta) => {
           const userId = users[tableMeta.rowIndex]._id;
           const userRole = users[tableMeta.rowIndex].role;
