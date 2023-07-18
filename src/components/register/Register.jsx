@@ -43,7 +43,6 @@ const Register = () => {
       );
       alertSuccess(messages.regSuccess, `Bienvenido, ${data.name}!`, () => {
         return;
-        // window.location.href = 'http://localhost:3000/home'
       });
     } catch (err) {
       alertError(`${err.response.data.error[0].msg}`, "Error", () => {

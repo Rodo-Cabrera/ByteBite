@@ -10,19 +10,46 @@ export const useAuth = () => {
   const [userId, setUserId] = useState(null)
   const [actualUser, setActualUser] = useState([])
 
-   useEffect(() => {
-     const resp = async () => {
-       if (token) {
-         await getOneUser(token, userId)
-           .then((response) => {
-             setActualUser([response.data]);
-           })
-           .catch((error) => console.log(error));
-       }
-     };
-     resp()
-   }, [token, userId]);
 
+  
+  
+   const login = useCallback(() => {
+     setToken(localStorage.getItem("token"));
+   }, [setToken]);
+
+  //  useEffect(() => {
+  //    const resp = async () => {
+  //      if (token) {
+  //        await getOneUser(token, userId)
+  //          .then((response) => {
+  //            setActualUser([response.data]);
+  //          })
+  //          .catch((error) => console.log(error));
+  //      }
+  //    };
+  //    resp()
+  //  }, [token, userId]);
+  
+  useEffect(() => {
+    const resp = async () => {
+      try {
+        if (token && userId) {
+          const response = await getOneUser(token, userId);
+          setActualUser([response.data]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    resp();
+  }, [token, userId]);
+
+   useEffect(() => {
+     const storedId = localStorage.getItem("payload");
+     if (storedId) {
+       setUserId(JSON.parse(storedId).id);
+     }
+   });
 
   useEffect(() => {
     const storedUser = localStorage.getItem('payload');
@@ -38,19 +65,12 @@ export const useAuth = () => {
     }
   });
 
-  useEffect(() => {
-    const storedId = localStorage.getItem('payload');
-    if (storedId) {
-      setUserId(JSON.parse(storedId).id)
-    }
-  })
+ 
   
   
 
   
-  const login = useCallback(() => {
-    setToken(localStorage.getItem('token'));
-  }, [setToken]);
+ 
 
   const logout = useCallback(() => {
     localStorage.removeItem('token');

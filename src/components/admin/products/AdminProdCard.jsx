@@ -101,12 +101,12 @@ const AdminProdCard = ({ product, updateProductState}) => {
             },
             buttonsStyling: false,
           });
-
+          
           swalWithBootstrapButtons
             .fire({
-              title: 'Esperando Confirmación',
+              title: "Esperando Confirmación",
               text: `Estás seguro que quieres editar el producto "${product.tittle}"?`,
-              icon: "warning",
+              icon: `warning`,
               showCancelButton: true,
               confirmButtonText: "Sí, editar",
               cancelButtonText: "No, cancelar!",
@@ -115,15 +115,13 @@ const AdminProdCard = ({ product, updateProductState}) => {
             .then(async (result) => {
               if (result.isConfirmed) {
                 await response();
-                await updateProductState(product._id, prodData); 
+                await updateProductState(product._id, prodData);
                 swalWithBootstrapButtons.fire(
                   "Edición exitosa!",
                   `El producto "${product.tittle}" se ha editado correctamente!`,
                   "success"
                 );
-              } else if (             
-                result.dismiss === Swal.DismissReason.cancel
-              ) {
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire(
                   "Cancelado",
                   `El producto "${product.tittle}" continuará como antes`,

@@ -206,9 +206,9 @@ export const getOneUser = async (token, id) => {
   }
 };
 
-export const editUser = async (token) => {
+export const editUser = async (token, userData, id) => {
   try {
-    return await axios.patch(`${DBURL}${endPointAdmin.editUser}`, {}, {
+    return await axios.patch(`${DBURL}${endPointAdmin.editUser}/${id}`, userData, {
       headers: {
         "access-token": token,
       },

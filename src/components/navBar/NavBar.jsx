@@ -52,7 +52,7 @@ const NavBar = () => {
   const handleProfile = () => setProfile(true);
   const handleCloseProfile = () => setProfile(false);
 
-
+  const userId = actualUser[0]?._id;
 
   return (
     <>
@@ -168,7 +168,7 @@ const NavBar = () => {
         <Offcanvas.Title className="text-center my-2">
           Perfil de usuario
         </Offcanvas.Title>
-        <UserPanel />
+        <UserPanel user={actualUser} userId={ userId } />
       </Offcanvas>
     </>
   );
