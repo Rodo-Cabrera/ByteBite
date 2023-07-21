@@ -1,21 +1,21 @@
 import React, { useContext, useState } from 'react'
 import './styles/userPanel.css'
 import { Image, Button, Form } from 'react-bootstrap';
-import { useAuth } from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { messages } from '../../utils/messages';
 import { validationsFields } from '../../utils/validation';
 import { userContext } from '../../context/AuthContext';
 import { editUser } from '../../API/Api';
+import Swal from "sweetalert2";
 
 
 
-const UserPanel = ({user, userId}) => {
+const UserPanel = ({ user, userId }) => {
 
 
   const { token } = useContext(userContext);
 
-  const [actualUserId, setActualUserId] = useState(null)
+  const [actualUserId, setActualUserId] = useState(null);
 
   const [changeAvatar, setChangeAvatar] = useState();
 
@@ -25,11 +25,8 @@ const UserPanel = ({user, userId}) => {
 
   const [mail, setMail] = useState({
     email: ``,
-    email2: ``
+    email2: ``,
   });
-
-
-
 
   const handleMailChange = (e) => {
     setMail((prev) => ({
@@ -44,26 +41,61 @@ const UserPanel = ({user, userId}) => {
     handleSubmit,
   } = useForm();
 
-  console.log({ userId });
-  console.log(user[0]);
-
-   
-
-  const onMailSubmit = async (userData, id) => {
-
-    const sendEditedMail = () => editUser(token, id, userData);
-    console.log(user[0]._id);
+  const onMailSubmit = async (userData) => {
+    const sendEditedMail = () => editUser(token, userData, userId);
     if (token) {
       try {
-        await sendEditedMail();
+        if (mail.email !== mail.email2) {
+          return Swal.fire({
+            icon: "error",
+            title: "Error en la edición",
+            text: `Los campos (${mail.email} y ${mail.email2}) no coinciden `,
+          });
+        } else {
+          const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: "btn btn-success mx-1",
+              cancelButton: "btn btn-danger mx-1",
+            },
+            buttonsStyling: false,
+          });
+
+          swalWithBootstrapButtons
+            .fire({
+              title: "Esperando Confirmación",
+              text: `Estás seguro que quieres editar tu email anterior (${user[0]?.email}) por (${mail.email}) ? `,
+              icon: `warning`,
+              showCancelButton: true,
+              confirmButtonText: "Sí, editar",
+              cancelButtonText: "No, cancelar!",
+              reverseButtons: true,
+            })
+            .then(async (result) => {
+              if (result.isConfirmed) {
+                await sendEditedMail();            
+                handleCloseEditMail();
+                swalWithBootstrapButtons.fire(
+                  "Edición exitosa!",
+                  `Se ha enviado un email a ${mail.email} con los detalles!`,
+                  "success"
+                );
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
+                handleCloseEditMail();
+                swalWithBootstrapButtons.fire(
+                  "Cancelado",
+                  `Tu email seguirá siendo "${user[0]?.email}"`,
+                  "error"
+                );
+              }
+            });
+        }
       } catch (error) {
         console.log(error);
       }
     } else {
-      return alert('no sos el usuario kpop')
+      return alert("no sos el usuario kpop");
     }
-  }
-
+  };
 
   return (
     <>
@@ -98,7 +130,7 @@ const UserPanel = ({user, userId}) => {
                 </Button>
               </div>
             ) : (
-              <Form onSubmit={handleSubmit(onMailSubmit)} className='my-4'>
+              <Form onSubmit={handleSubmit(onMailSubmit)} className="my-4">
                 <Form.Group className="text-center my-2">
                   <Form.Label>Editar Mail</Form.Label>
                   <Form.Control
@@ -135,7 +167,7 @@ const UserPanel = ({user, userId}) => {
                   <Form.Control
                     type="text"
                     placeholder={mail.email}
-                    autoComplete='off'
+                    autoComplete="off"
                     name="email2"
                     {...register("email2", {
                       required: true,
@@ -160,22 +192,20 @@ const UserPanel = ({user, userId}) => {
                     )}
                   </div>
                 </Form.Group>
-                <div className='d-flex justify-content-around'>
-                    <Button variant='warning' type='submit'>
-                      Aceptar
-                   </Button>
+                <div className="d-flex justify-content-around">
+                  <Button variant="warning" type="submit">
+                    Aceptar
+                  </Button>
 
-                    <Button variant='danger' onClick={handleCloseEditMail}>
-                      Cancelar
+                  <Button variant="danger" onClick={handleCloseEditMail}>
+                    Cancelar
                   </Button>
                 </div>
               </Form>
             )}
 
             <h6>{user[0].disabled === false && <p>Usuario activo</p>}</h6>
-            <h6>
-              {user[0].disabled === true && <p>Usuario bloqueado</p>}
-            </h6>
+            <h6>{user[0].disabled === true && <p>Usuario bloqueado</p>}</h6>
           </div>
           <Button
             className="btnEdit btn-outline-success user"
@@ -187,6 +217,6 @@ const UserPanel = ({user, userId}) => {
       )}
     </>
   );
-}
+};
 
 export default UserPanel

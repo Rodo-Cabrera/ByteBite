@@ -54,6 +54,7 @@ const NavBar = () => {
 
   const userId = actualUser[0]?._id;
 
+
   return (
     <>
       <Navbar
@@ -84,14 +85,14 @@ const NavBar = () => {
                   Registrarse
                 </Link>
               </Nav.Link>
-              
+
               {role !== "client" && (
                 <Nav.Link>
                   <Link className="underline nav-link" to="/userlist">
                     Admin panel
                   </Link>
                 </Nav.Link>
-              )}            
+              )}
 
               {isLogged ? (
                 <div className="user">
@@ -168,7 +169,10 @@ const NavBar = () => {
         <Offcanvas.Title className="text-center my-2">
           Perfil de usuario
         </Offcanvas.Title>
-        <UserPanel user={actualUser} userId={ userId } />
+        <UserPanel
+          user={actualUser}
+          userId={userId}
+        />
       </Offcanvas>
     </>
   );

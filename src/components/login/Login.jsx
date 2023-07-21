@@ -26,13 +26,10 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const navigate = useLocation();
-  const { login, isLogged } = useAuth()
+
+
+  const { login } = useAuth()
   
-  // useEffect(() => {
-  //   if (isLogged) navigate('/')
-  // }, [isLogged, navigate]);
- 
 
 
   const handleSubmit = async (e) => {
@@ -44,7 +41,7 @@ const Login = () => {
       login()
       alertSuccess(messages.logSuccess, data.msg);
     } catch (err) {
-      alertError(`${err.message}`, "Error al iniciar sesión", () => {
+      alertError(`${err.response.data}`, "Error al iniciar sesión", () => {
         console.log(err);
       });
     }
