@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
 import './styles/userPanel.css'
-import { Image, Button, Form } from 'react-bootstrap';
+import { Image, Button, Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { messages } from '../../utils/messages';
 import { validationsFields } from '../../utils/validation';
 import { userContext } from '../../context/AuthContext';
 import { editUser } from '../../API/Api';
 import Swal from "sweetalert2";
+import AvatarChange from './AvatarChange';
 
 
 
@@ -15,18 +16,27 @@ const UserPanel = ({ user, userId }) => {
 
   const { token } = useContext(userContext);
 
-  const [actualUserId, setActualUserId] = useState(null);
+ 
 
-  const [changeAvatar, setChangeAvatar] = useState();
+  const [showAvatarChange, setShowAvatarChange] = useState(false);
+  const handleAvatarHover = (isHovering) => {
+    setShowAvatarChange(isHovering)
+  }
+
 
   const [editMail, setEditMail] = useState(false);
   const handleOpenEditMail = () => setEditMail(true);
   const handleCloseEditMail = () => setEditMail(false);
 
+  const [avatarMod, setAvatarMod] = useState(false);
+  const handleOpenA = () => setAvatarMod(true);
+  const handleCloseA = () => setAvatarMod(false);
+
   const [mail, setMail] = useState({
     email: ``,
     email2: ``,
   });
+
 
   const handleMailChange = (e) => {
     setMail((prev) => ({
@@ -101,12 +111,64 @@ const UserPanel = ({ user, userId }) => {
     <>
       {user.length > 0 && (
         <div>
-          <Image
-            src={user[0].avatar}
-            alt={user[0].avatar}
-            roundedCircle
-            className="userAvatar my-4 user"
-          />
+          {user[0].avatar ? (
+            <div
+              className="avatar-container"
+              onMouseEnter={() => handleAvatarHover(true)}
+              onMouseLeave={() => handleAvatarHover(false)}
+            >
+              <Image
+                src={user[0].avatar}
+                alt={user[0].avatar}
+                roundedCircle
+                className="userAvatar my-4 user"
+              />
+              {showAvatarChange && (
+                <Button className="change-avatar-button user" variant="success" onClick={handleOpenA}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50"
+                    height="50"
+                    fill="currentColor"
+                    class="bi bi-card-image"
+                    viewBox="0 0 16 16"
+                    className="change-avatar-svg"
+                  >
+                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z" />
+                  </svg>
+                </Button>
+              )}
+            </div>
+          ) : (
+            <div
+              className="avatar-container"
+              onMouseEnter={() => handleAvatarHover(true)}
+              onMouseLeave={() => handleAvatarHover(false)}
+            >
+              <Image
+                src="././img/noAvatar.jpg"
+                alt="No avatar"
+                roundedCircle
+                className="userAvatar my-4 user"
+              />
+              {showAvatarChange && (
+                <Button className="change-avatar-button user" variant="success" onClick={handleOpenA}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50"
+                    height="50"
+                    fill="currentColor"
+                    class="bi bi-card-image"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z" />
+                  </svg>
+                </Button>
+              )}
+            </div>
+          )}
           <div className="userInfo mx-3">
             <p className="user">{user[0].role}</p>
             <h3 className="text-center mb-3">
@@ -215,6 +277,9 @@ const UserPanel = ({ user, userId }) => {
           </Button>
         </div>
       )}
+      <Modal show={avatarMod} onHide={handleCloseA}>
+        <AvatarChange userId={ userId } />
+      </Modal>
     </>
   );
 };

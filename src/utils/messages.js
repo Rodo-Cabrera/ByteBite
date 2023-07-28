@@ -45,6 +45,11 @@ export const messages = {
   pwPatternError: "La contraseña debe contener al menos una mayúscula, números y letras",
   pwMatchError: "Las contraseñas no coinciden",
 
+  //Mensaje para Avatar
+  avatarError: "Solo puedes cargar una imagen",
+  avatarSizeError: "La imagen es demasiado grande",
+  avatarEmptyError: "Debes cargar una imagen",
+
   //Mensajes generales
   genericErrorPost: "No se pudo guardar. Intente más tardecito",
   failGetProducts:

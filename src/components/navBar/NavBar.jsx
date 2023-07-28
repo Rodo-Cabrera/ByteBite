@@ -126,11 +126,19 @@ const NavBar = () => {
                     data-tooltip-id="userTooltip"
                     data-tooltip-content="Mi perfil"
                   >
-                    <img
-                      src={actualUser[0].avatar}
-                      alt={actualUser[0].avatar}
-                      className="navAvatar"
-                    />
+                    {actualUser[0].avatar ? (
+                      <img
+                        src={actualUser[0].avatar}
+                        alt={actualUser[0].avatar}
+                        className="navAvatar"
+                      />
+                    ) : (
+                      <img
+                        src="././img/noAvatar.jpg"
+                        alt='No avatar'
+                        className="navAvatar"
+                      />
+                    )}
                   </Button>
                 </div>
                 <strong>{actualUser[0].name}</strong>
@@ -169,10 +177,7 @@ const NavBar = () => {
         <Offcanvas.Title className="text-center my-2">
           Perfil de usuario
         </Offcanvas.Title>
-        <UserPanel
-          user={actualUser}
-          userId={userId}
-        />
+        <UserPanel user={actualUser} userId={userId} />
       </Offcanvas>
     </>
   );

@@ -277,3 +277,19 @@ export const clientUser = async (token, id) => {
     console.log(error);
   }
 };
+
+export const uploadAvatar = async (token, id, avatarForm) => {
+  try {
+    return await axios.post(
+      `${DBURL}${endPointUsers.uploadAvatar}/${id}`,
+      avatarForm,
+      {
+        headers: {
+          "access-token": token,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

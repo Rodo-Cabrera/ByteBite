@@ -68,7 +68,7 @@ const AdminProdCard = ({ product, updateProductState}) => {
         } else {
           await offerProd(token, product._id)               
         }
-        await updateProductState(product._id, { offer: !offer });
+        updateProductState(product._id, { offer: !offer });
         setOffer(!offer); 
         const message = offer
           ? "Producto SACADO de oferta"

@@ -13,6 +13,7 @@ export const endPointUsers = {
   register: "/users",
   login: "/login",
   getUser: "/users/get-user-by-id",
+  uploadAvatar: "/users/upload-avatar"
 };
 
 export const endPointAdmin = {
