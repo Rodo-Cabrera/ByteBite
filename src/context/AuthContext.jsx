@@ -1,6 +1,5 @@
-import React, { createContext, useEffect, useState, useReducer } from "react";
-import clientAxios from "../utils/clientAxios";
-import { endPointUsers } from "../utils/endpointsConfig";
+import React, { createContext, useState } from "react";
+
 
 
 export const userContext = createContext();

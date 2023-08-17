@@ -25,3 +25,9 @@
   height: 100px;
   opacity: 0.3;
 }
+
+.swal-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}

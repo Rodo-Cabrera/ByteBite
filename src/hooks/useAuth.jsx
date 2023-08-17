@@ -65,12 +65,6 @@ export const useAuth = () => {
     }
   });
 
- 
-  
-  
-
-  
- 
 
   const logout = useCallback(() => {
     localStorage.removeItem('token');

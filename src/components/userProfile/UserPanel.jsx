@@ -45,6 +45,11 @@ const UserPanel = ({ user, userId }) => {
     }));
   };
 
+  const [changedAvatar, setChangedAvatar] = useState(user[0].avatar)
+
+  console.log(changedAvatar);
+
+
   const {
     register,
     formState: { errors },
@@ -118,7 +123,7 @@ const UserPanel = ({ user, userId }) => {
               onMouseLeave={() => handleAvatarHover(false)}
             >
               <Image
-                src={user[0].avatar}
+                src={changedAvatar}
                 alt={user[0].avatar}
                 roundedCircle
                 className="userAvatar my-4 user"
@@ -278,7 +283,7 @@ const UserPanel = ({ user, userId }) => {
         </div>
       )}
       <Modal show={avatarMod} onHide={handleCloseA}>
-        <AvatarChange userId={ userId } />
+        <AvatarChange userId={userId} changedAvatar={ changedAvatar } setChangedAvatar={setChangedAvatar} onClose={handleCloseA} />
       </Modal>
     </>
   );
