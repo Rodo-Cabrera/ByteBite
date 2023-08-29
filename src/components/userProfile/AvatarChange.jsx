@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { Button, Form, Image } from "react-bootstrap";
 import Swal from "sweetalert2";
 import "./styles/userPanel.css";
+import { useAuth } from "../../hooks/useAuth";
 
 const AvatarChange = ({ userId, changedAvatar, setChangedAvatar, onClose }) => {
   const {
@@ -18,7 +19,8 @@ const AvatarChange = ({ userId, changedAvatar, setChangedAvatar, onClose }) => {
 
   const [changeAvatar, setChangeAvatar] = useState("");
 
-  const { token } = useContext(userContext);
+  const { token, handleUpdateUser } = useContext(userContext);
+
 
   const handleAvatarChange = async (e) => {
     const file = e.target.files;
@@ -50,6 +52,7 @@ const AvatarChange = ({ userId, changedAvatar, setChangedAvatar, onClose }) => {
       try {
         await newAvatar();
         setChangedAvatar(changeAvatar);
+        handleUpdateUser();
       } catch (error) {
         console.log(error);
       }

@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Montserrat:wght@400;700&family=Poppins&display=swap');
+
 #App {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: 'Poppins', sans-serif;
 }
 
 #footer {

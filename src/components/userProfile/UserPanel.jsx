@@ -47,8 +47,6 @@ const UserPanel = ({ user, userId }) => {
 
   const [changedAvatar, setChangedAvatar] = useState(user[0].avatar)
 
-  console.log(changedAvatar);
-
 
   const {
     register,

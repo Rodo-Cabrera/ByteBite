@@ -5,7 +5,6 @@ import {
 } from "../../../API/Api";
 import { Button, Modal, Col } from "react-bootstrap";
 import { userContext } from "../../../context/AuthContext";
-import { useAuth } from "../../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 import "./styles/prodStyle.css";
 import { Grid } from "@mui/material";
@@ -16,8 +15,6 @@ const AllProdDatatable = () => {
   const [prod, setProd] = useState([]);
 
   const { token } = useContext(userContext);
-
-  const { role } = useAuth();
 
    const resp = async () => {
      if (token) {

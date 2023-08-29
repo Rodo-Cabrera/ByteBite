@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -12,6 +12,7 @@ import Cart from '../shop/cart/Cart';
 import { useAuth } from '../../hooks/useAuth';
 import UserPanel from '../userProfile/UserPanel';
 import { Tooltip } from "react-tooltip";
+import { userContext } from '../../context/AuthContext';
 
 
 
@@ -38,9 +39,12 @@ const NavBar = () => {
     }
   };
 
-  const { role } = useAuth();
 
-  const { isLogged, logout, actualUser } = useAuth()
+
+  const { token } = useContext(userContext);
+
+  const { logout, role, userId, actualUser, user, isLogged } = useAuth();
+
 
   const [loginMod, setLoginMod] = useState(false);
 
@@ -51,9 +55,6 @@ const NavBar = () => {
 
   const handleProfile = () => setProfile(true);
   const handleCloseProfile = () => setProfile(false);
-
-  const userId = actualUser[0]?._id;
-
 
   return (
     <>
@@ -135,13 +136,13 @@ const NavBar = () => {
                     ) : (
                       <img
                         src="././img/noAvatar.jpg"
-                        alt='No avatar'
+                        alt="No avatar"
                         className="navAvatar"
                       />
                     )}
                   </Button>
                 </div>
-                <strong>{actualUser[0].name}</strong>
+                <strong>{user}</strong>
               </div>
             )}
             <Cart />

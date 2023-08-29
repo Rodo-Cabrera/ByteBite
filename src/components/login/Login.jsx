@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { alertSuccess, alertError } from "../../utils/alertCustom";
 import { messages } from "../../utils/messages";
@@ -20,8 +20,6 @@ const Login = () => {
     formState : {errors}
   } = useForm();
 
-
-
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -38,7 +36,7 @@ const Login = () => {
       const { data } = await clientAxios.post(`${endPointUsers.login}`, userData);
       localStorage.setItem("token", data?.token);
       localStorage.setItem("payload", data?.payload); 
-      login()
+      login();
       alertSuccess(messages.logSuccess, data.msg);
     } catch (err) {
       alertError(`${err.response.data}`, "Error al iniciar sesión", () => {
