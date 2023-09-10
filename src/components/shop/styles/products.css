@@ -24,4 +24,15 @@
 .products li {
   display: flex;
   flex-direction: column;
-};
+}
+
+.buy-butons {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 10px 0;
+  gap: 2px;
+}
+
+.stockPrice{
+  color: green;
+}

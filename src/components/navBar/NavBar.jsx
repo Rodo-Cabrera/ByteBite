@@ -12,7 +12,6 @@ import Cart from '../shop/cart/Cart';
 import { useAuth } from '../../hooks/useAuth';
 import UserPanel from '../userProfile/UserPanel';
 import { Tooltip } from "react-tooltip";
-import { userContext } from '../../context/AuthContext';
 
 
 
@@ -41,8 +40,6 @@ const NavBar = () => {
 
 
 
-  const { token } = useContext(userContext);
-
   const { logout, role, userId, actualUser, user, isLogged } = useAuth();
 
 
@@ -60,14 +57,14 @@ const NavBar = () => {
     <>
       <Navbar
         expand="lg"
-        className="navContainer sticky-top shadow"
+        className="navContainer sticky-top "
         ref={navRef}
       >
         <Container>
           <Link to="/">
             <Navbar.Brand>ByteBite</Navbar.Brand>
           </Link>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav d-flex" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link id="navbarNav">

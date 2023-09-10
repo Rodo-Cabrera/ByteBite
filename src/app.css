@@ -13,4 +13,9 @@
     width: 100%;
     text-align: center;
     z-index: 1;
-};
+    background: #222;
+    border-top: white 2px;
+    
+}
+
+

@@ -1,5 +1,5 @@
 .navContainer {
-  background-color: #000000 !important;
+  background-color: #222;
   color: white;
 }
 
@@ -8,6 +8,7 @@
   width: 4rem ;
   height: 4rem;
   margin: 1px, 0px, 1px, 0px;
+  color: white;
 }
 
 .regBtn{
@@ -67,7 +68,7 @@
   height: 4px;
   bottom: 0px;
   left: 0;
-  background-color: #ffd900;
+  background-color: rgb(255, 204, 0);
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-in-out;
@@ -82,4 +83,28 @@
   width: 2rem;
   height: 30px;
   border-radius: 100%;
+}
+
+.collapsed {
+  right: 0 !important;
+}
+
+
+.navbar-toggler  {
+ background-color:rgb(255, 204, 0) ;
+ margin-left: auto;
+}
+
+@media (max-width: 990px) {
+  .user-column {
+    display: none !important;
+  }
+}
+
+.user-column {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 90px;
+  z-index: 99;
 }

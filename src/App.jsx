@@ -10,13 +10,14 @@ import './app.css'
 import Home from "./components/home/Home";
 import CreateProduct from './components/admin/products/CreateProduct';
 import { AuthProvider, userContext } from './context/AuthContext';
-import UserList from './components/admin/users/UserList';
 import Users from './components/pages/Users';
+
 
 
 const App = () => {
   
-  const token = useContext(userContext)
+  const token = useContext(userContext);
+
 
   return (
     <>

@@ -13,11 +13,11 @@ const Landing = () => {
 
   const slideShow = useRef(null);
   const slideInterval = useRef(null);
+  const leftButton = useRef();
+  const rightButton = useRef();
 
   const next = () => {
     if (slideShow.current.children.length > 0) {
-
-      console.log(slideShow);
     
       const firstSlide = slideShow.current.children[0];
 
@@ -80,6 +80,26 @@ const Landing = () => {
       }, 5000);
     });
 
+    leftButton.current.addEventListener("mouseenter", () => {
+      clearInterval(slideInterval.current);
+    });
+
+    leftButton.current.addEventListener("mouseleave", () => {
+      slideInterval.current = setInterval(() => {
+        next();
+      }, 5000);
+    });
+
+    rightButton.current.addEventListener("mouseenter", () => {
+      clearInterval(slideInterval.current);
+    });
+
+    rightButton.current.addEventListener("mouseleave", () => {
+      slideInterval.current = setInterval(() => {
+        next();
+      }, 5000);
+    });
+
 
   }, []);
 
@@ -122,7 +142,7 @@ const Landing = () => {
         </div>
       </div>
       <div className="buttonsContainer">
-        <button className="slideButton leftButton" onClick={() => prev()}>
+        <button className="slideButton leftButton" ref={leftButton} onClick={() => prev()}>
           <div>
             <svg
               width="24"
@@ -136,7 +156,7 @@ const Landing = () => {
             </svg>
           </div>
         </button>
-        <button className="slideButton rightButton" onClick={() => next()}>
+        <button className="slideButton rightButton" ref={rightButton} onClick={() => next()}>
           <div>
             <svg
               width="24"

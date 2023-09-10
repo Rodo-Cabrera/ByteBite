@@ -1,0 +1,40 @@
+@import './commons.scss';
+
+.sideBarMenu {
+  background-color: #222;
+  color: white;
+  height: max-content;
+  position: absolute;
+  left: 0;
+  min-height: 300% ;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  @include transition(width);
+  &.expanded{
+    width: 300px;
+  }
+  &.collapsed {
+    width: 70px;
+    align-items: center;
+  }
+
+  .menuButton {
+    display: flex;
+    justify-content: flex-end;
+
+    .burgerButton{
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      color: white;
+      padding: 10px;
+      width: 70px;
+    }
+
+
+  }
+
+}
+

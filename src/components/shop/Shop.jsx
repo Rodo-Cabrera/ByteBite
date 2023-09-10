@@ -12,7 +12,10 @@ const Shop = () => {
   
   const { productFilter } = useFilters();
 
-  const filteredProducts = productFilter(videoCards)
+  const filteredProducts = productFilter(videoCards);
+
+ 
+
 
   return (
     <div>
